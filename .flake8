@@ -6,4 +6,4 @@
 ignore = E266, E303, F403, W503
 max-line-length = 89
 max-complexity = 18
-select = B,C,E,F,W,B9
+select = B,C,E,F,T,W,B9

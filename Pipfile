@@ -8,6 +8,7 @@ pre-commit = "*"
 black = "==19.10b0"
 flake8 = "*"
 flake8-bugbear = "*"
+flake8-fixme = "*"
 
 [packages]
 django = "==3.0.*"
