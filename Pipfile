@@ -9,6 +9,8 @@ black = "==19.10b0"
 flake8 = "*"
 flake8-bugbear = "*"
 flake8-fixme = "*"
+django-extensions = "*"
+django-debug-toolbar = "*"
 
 [packages]
 django = "==3.0.*"
