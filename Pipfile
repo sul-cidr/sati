@@ -12,6 +12,8 @@ flake8-fixme = "*"
 
 [packages]
 django = "==3.0.*"
+dj-database-url = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.8"
