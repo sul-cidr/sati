@@ -1,0 +1,28 @@
+/* This should probably be done by recompiling the baton app,
+ *  but this is sufficient for now.
+ */
+
+body {
+  font-family: "Heebo", sans-serif !important;
+}
+
+th,
+.change-form #content-main > form .required,
+.passwordchange #content-main > form .required {
+  font-weight: 500 !important;
+}
+
+.site-footer a {
+  display: flex;
+  align-items: center;
+  margin: 0 2em;
+}
+
+.site-footer a i,
+.site-footer a img {
+  margin-right: 10px;
+}
+
+.change-form #content-main > form .tabular.inline-related textarea {
+  width: 100% !important;
+}

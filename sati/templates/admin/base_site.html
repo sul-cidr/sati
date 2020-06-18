@@ -1,0 +1,47 @@
+{% extends "admin/base.html" %}
+{% load static baton_tags %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block extrastyle %}
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static "baton_overrides.css" %}">
+{% endblock %}
+
+
+{% block extrahead %}
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="{% static 'baton/app/dist/baton.min.js' %}"></script>
+    <!-- <script src="http://localhost:8080/dist/baton.min.js"></script> -->
+    <script>
+        {% baton_config 'CONFIRM_UNSAVED_CHANGES' as confirm_unsaved_changes %}
+        {% baton_config 'SHOW_MULTIPART_UPLOADING' as show_multipart_uploading %}
+        {% baton_config 'ENABLE_IMAGES_PREVIEW' as enable_images_preview %}
+        {% baton_config 'CHANGELIST_FILTERS_IN_MODAL' as changelist_filters_in_modal %}
+        {% baton_config 'MENU_ALWAYS_COLLAPSED' as menu_always_collapsed %}
+        (function ($, undefined) {
+            $(window).on('load', function () {
+                Baton.init({
+                    api: {
+                        app_list: '{% url 'baton-app-list-json' %}'
+                    },
+                    confirmUnsavedChanges: {{ confirm_unsaved_changes|yesno:"true,false" }},
+                    showMultipartUploading: {{ show_multipart_uploading|yesno:"true,false" }},
+                    enableImagesPreview: {{ enable_images_preview|yesno:"true,false" }},
+                    changelistFiltersInModal: {{ changelist_filters_in_modal|yesno:"true,false" }},
+                    menuAlwaysCollapsed: {{ menu_always_collapsed|yesno:"true,false" }}
+                });
+            })
+        })(jQuery, undefined)
+    </script>
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">SATI :: Database Administration</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block footer %}
+    {% footer %}
+{% endblock %}
