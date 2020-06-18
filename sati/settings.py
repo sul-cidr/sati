@@ -13,6 +13,8 @@ import os
 import dj_database_url
 from dotenv import load_dotenv
 
+from .baton_settings import BATON  # noqa: F401
+
 load_dotenv()
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
