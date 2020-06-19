@@ -21,7 +21,7 @@ class Item(models.Model):
     # origin = models.ForeignKey(ItemOrigin, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.item_id} ({self.name.title()})"
+        return f"{self.item_id} - {self.name.title()}"
 
 
 class ItemCoding(models.Model):
@@ -29,3 +29,6 @@ class ItemCoding(models.Model):
     coding_scheme = models.CharField(max_length=30)
     coding = JSONField()
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Coding for {self.item}"

@@ -1,7 +1,30 @@
 from django.contrib import admin
 
-from sati.items.models import Item, ItemCoding, ItemOrigin
+from sati.items.models import Item, ItemCoding, ItemFormat
 
-admin.site.register(Item)
-admin.site.register(ItemCoding)
-admin.site.register(ItemOrigin)
+
+class LanguageUsageInline(admin.TabularInline):
+    model = ItemCoding
+    extra = 0
+
+
+class ItemFormatFilter(admin.SimpleListFilter):
+    title = "Format"
+    parameter_name = "format"
+
+    def lookups(self, request, model_admin):
+        return ItemFormat.choices
+
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(format__contains=[self.value()])
+        return queryset
+
+
+@admin.register(Item)
+class ItemAdmin(admin.ModelAdmin):
+    list_display = ("item_id", "name", "format")
+    list_filter = (ItemFormatFilter,)
+    search_fields = ("item_id", "name")
+
+    inlines = [LanguageUsageInline]
