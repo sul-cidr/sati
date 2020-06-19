@@ -1,0 +1,104 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<head>
+  <title>SATI - Semiotic Analysis of Test Items</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #263238;
+    }
+
+    body {
+      background-color: #eff0f1;
+      color: #333;
+      font: 20px "Heebo", sans-serif;
+      text-align: center;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+    }
+
+    h1 {
+      color: var(--primary);
+      font-size: 40px;
+      font-weight: 500;
+      margin-bottom: 0;
+      text-decoration: underline;
+      text-decoration-color: rgba(38, 50, 56, .2);
+      width: 100%;
+    }
+
+    img {
+      margin-right: 10px;
+    }
+
+    article {
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 1px 2px 0 rgba(0, 0, 0, .24);
+      background: #fff;
+      display: inline-block;
+      padding: 20px;
+      width: 755px;
+    }
+
+    p {
+      text-align: center;
+    }
+
+    p:last-child a {
+      align-items: flex-end;
+      display: flex;
+      font-weight: normal;
+      justify-content: center;
+      line-height: 40px
+    }
+
+    a {
+      color: var(--primary);
+      font-weight: 500;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    a:hover {
+      color: #333;
+      text-decoration: none;
+    }
+
+    @media (min-width: 768px) {
+      body {
+        padding-top: 150px;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+  <article class="panel">
+    <header>
+      <h1>SATI - Semiotic Analysis of Test Items</h1>
+    </header>
+    <div>
+      <p>This site is under development.<br>Please direct enquiries to
+        <a href="mailto:contact-cidr@stanford.edu">contact-cidr@stanford.edu</a>.</p>
+      <p>If you’re looking for the database administration interface, you’ll find it
+        <a href="/admin">here</a>.</p>
+        <p>
+            <a href="http://cidr.stanford.edu/"
+                title="Center for Interdisciplinary Digital Research @ Stanford Libraries">
+                <img src="{% static "img/cidr.no-text.trsp.167x80.png" %}" alt="CIDR logo">
+                @ Stanford University Libraries
+            </a>
+        </p>
+      </div>
+  </article>
+</body>
+
+</html>
