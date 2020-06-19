@@ -20,7 +20,7 @@ class UserAdmin(UserAdmin):
         "is_active",
     )
     fieldsets = (
-        (None, {"fields": ("email", "password")}),
+        (None, {"fields": ("email", "password", "require_password_change")}),
         (_("Personal info"), {"fields": ("first_name", "last_name")}),
         (
             _("Permissions"),
@@ -36,6 +36,7 @@ class UserAdmin(UserAdmin):
                     "email",
                     "password1",
                     "password2",
+                    "require_password_change",
                     "is_active",
                     "is_staff",
                     "is_superuser",
