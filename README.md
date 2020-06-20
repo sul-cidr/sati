@@ -4,7 +4,7 @@
 
 
 ## Development
-With a working version on Python 3.8 and Pipenv:
+With a working version of Python 3.8 and Pipenv:
 
 1. Install dependencies (use `sync` instead of `install` to use `Pipfile.lock` instead, and ensure a deterministic enviroment).
 	```
@@ -16,9 +16,8 @@ With a working version on Python 3.8 and Pipenv:
 	$ pre-commit install
 	```
 
-2. Create a database (if not created yet) and migrate. A `DATABASE_URL` can be defined in a `.env` file or set as an environment variable. See [`.env_tempate`](.env_template) and [here](https://github.com/kennethreitz/dj-database-url#url-schema) for details. It will default to `sqlite:///db.sqlite3`.
+2. Create a database (if not created yet) and migrate.  Only PostgreSQL is supported.  A `DATABASE_URL` can be defined in a `.env` file or set as an environment variable. See [`.env_tempate`](.env_template) and [here](https://github.com/kennethreitz/dj-database-url#url-schema) for details.
 	```
-	$ touch db.sqlite3
 	$ pipenv run python manage.py migrate
 	```
 
