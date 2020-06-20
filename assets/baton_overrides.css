@@ -32,3 +32,13 @@ th,
 .change-form #content-main > form textarea {
   flex: 1 0 auto;
 }
+
+/* */
+ul.choice-array-field {
+  list-style: none;
+  padding: 0;
+}
+
+ul.choice-array-field li {
+  display: inline-block;
+}

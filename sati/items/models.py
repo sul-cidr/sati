@@ -1,5 +1,7 @@
-from django.contrib.postgres.fields import ArrayField, JSONField
+from django.contrib.postgres.fields import JSONField
 from django.db import models
+
+from .fields import ChoiceArrayField
 
 
 class ItemFormat(models.TextChoices):
@@ -27,7 +29,7 @@ class ItemOrigin(models.Model):
 class Item(models.Model):
     item_id = models.CharField(max_length=30, unique=True)
     name = models.CharField(max_length=30)
-    format = ArrayField(models.CharField(max_length=2, choices=ItemFormat.choices))
+    format = ChoiceArrayField(models.CharField(max_length=2, choices=ItemFormat.choices))
     content_area = models.CharField(max_length=2, choices=ContentArea.choices)
     # origin = models.ForeignKey(ItemOrigin, on_delete=models.CASCADE)
 
