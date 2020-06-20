@@ -4,11 +4,13 @@
 
 body {
   font-family: "Heebo", sans-serif !important;
+  overflow-y: scroll;
 }
 
 th,
 .change-form #content-main > form .required,
-.passwordchange #content-main > form .required {
+.passwordchange #content-main > form .required,
+.nav-tabs .nav-link {
   font-weight: 500 !important;
 }
 
@@ -25,4 +27,8 @@ th,
 
 .change-form #content-main > form .tabular.inline-related textarea {
   width: 100% !important;
+}
+
+.change-form #content-main > form textarea {
+  flex: 1 0 auto;
 }
