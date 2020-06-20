@@ -5,8 +5,8 @@ from .fields import ChoiceArrayField
 
 
 class ItemFormat(models.TextChoices):
-    MC = "MC", "MC"
-    CR = "CR", "CR"
+    MC = "MC", "Multiple Choice"
+    CR = "CR", "Constructed Response"
     FB = "FB", "FB"
     FT = "FT", "FT"
     FI = "FI", "FI"
