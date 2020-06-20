@@ -23,8 +23,8 @@ class ItemFormatFilter(admin.SimpleListFilter):
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ("item_id", "name", "format")
-    list_filter = (ItemFormatFilter,)
+    list_display = ("item_id", "name", "content_area", "format")
+    list_filter = ("content_area", ItemFormatFilter)
     search_fields = ("item_id", "name")
 
     inlines = [LanguageUsageInline]

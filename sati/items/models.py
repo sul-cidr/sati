@@ -10,6 +10,12 @@ class ItemFormat(models.TextChoices):
     FI = "FI", "FI"
 
 
+class ContentArea(models.TextChoices):
+    EARTH_SCIENCE = "ES", "Earth Science"
+    LIFE_SCIENCE = "LS", "Life Science"
+    PHYSCIAL_SCIENCE = "PS", "Physical Science"
+
+
 class ItemOrigin(models.Model):
     origin = JSONField()
 
@@ -18,6 +24,7 @@ class Item(models.Model):
     item_id = models.CharField(max_length=30, unique=True)
     name = models.CharField(max_length=30)
     format = ArrayField(models.CharField(max_length=2, choices=ItemFormat.choices))
+    content_area = models.CharField(max_length=2, choices=ContentArea.choices)
     # origin = models.ForeignKey(ItemOrigin, on_delete=models.CASCADE)
 
     def __str__(self):
