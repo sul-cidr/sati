@@ -16,6 +16,10 @@ class ContentArea(models.TextChoices):
     PHYSCIAL_SCIENCE = "PS", "Physical Science"
 
 
+class CodingScheme(models.TextChoices):
+    WANG = "WC", "Wang, C. (2012)"
+
+
 class ItemOrigin(models.Model):
     origin = JSONField()
 
@@ -33,7 +37,7 @@ class Item(models.Model):
 
 class ItemCoding(models.Model):
     coding_source = models.CharField(max_length=30)
-    coding_scheme = models.CharField(max_length=30)
+    coding_scheme = models.CharField(max_length=2, choices=CodingScheme.choices)
     coding = JSONField()
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
 
