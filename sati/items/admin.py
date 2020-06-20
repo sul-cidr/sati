@@ -3,9 +3,11 @@ from django.contrib import admin
 from sati.items.models import Item, ItemCoding, ItemFormat
 
 
-class LanguageUsageInline(admin.TabularInline):
+class ItemCodingInline(admin.StackedInline):
     model = ItemCoding
     extra = 0
+    verbose_name = "Coding"
+    verbose_name_plural = "Codings"
 
 
 class ItemFormatFilter(admin.SimpleListFilter):
@@ -27,4 +29,16 @@ class ItemAdmin(admin.ModelAdmin):
     list_filter = ("content_area", ItemFormatFilter)
     search_fields = ("item_id", "name")
 
-    inlines = [LanguageUsageInline]
+    inlines = [ItemCodingInline]
+
+    fieldsets = (
+        (
+            "Item",
+            {
+                "fields": ("item_id", "name", "content_area", "format"),
+                "classes": ("baton-tabs-init", "baton-tab-inline-itemcoding"),
+            },
+        ),
+    )
+
+    list_per_page = 50
