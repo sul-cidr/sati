@@ -1,19 +1,37 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import Group
+from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
 from .models import User
 
 
+import hashlib
+import urllib
+
+
+def gravatar_url(email, size=50):
+    # urllib.parse.urlencode({"d": "/static/images/defaultavatar.jpg", "s": str(size)}),
+    return "https://www.gravatar.com/avatar/{}?{}".format(
+        hashlib.md5(email.lower().encode("utf8")).hexdigest(),
+        urllib.parse.urlencode({"s": str(size)}),
+    )
+
+
 class UserAdmin(UserAdmin):
     model = User
     list_display = (
+        "gravatar",
         "email",
         "last_login",
         "is_active",
         "is_staff",
         "is_superuser",
+    )
+    list_display_links = (
+        "gravatar",
+        "email",
     )
     list_filter = (
         "is_staff",
@@ -46,6 +64,12 @@ class UserAdmin(UserAdmin):
     )
     search_fields = ("email",)
     ordering = ("id",)
+
+    def gravatar(self, obj):
+        return mark_safe(f"<img src='{gravatar_url(obj.email)}' width='50' height='50'>")
+
+    gravatar.allow_tags = True
+    gravatar.__name__ = ""
 
 
 admin.site.unregister(Group)

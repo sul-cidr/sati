@@ -42,3 +42,13 @@ ul.choice-array-field {
 ul.choice-array-field li {
   display: inline-block;
 }
+
+/* */
+.change-list .results table th,
+.change-list .results table td {
+  vertical-align: middle !important;
+}
+.field-gravatar {
+  text-align: center;
+  width: 50px;
+}
