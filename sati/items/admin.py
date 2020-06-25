@@ -39,6 +39,7 @@ class ItemAdmin(admin.ModelAdmin):
                 "classes": ("baton-tabs-init", "baton-tab-inline-itemcoding"),
             },
         ),
+        ("Content", {"fields": ("main_image",)}),
     )
 
     list_per_page = 50
