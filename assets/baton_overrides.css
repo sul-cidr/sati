@@ -52,3 +52,12 @@ ul.choice-array-field li {
   text-align: center;
   width: 50px;
 }
+
+.field-main_image .baton-image-preview {
+  height: auto !important;
+  max-width: 100%;
+}
+
+label[for="id_main_image"] {
+  display: none;
+}
