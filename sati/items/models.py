@@ -1,5 +1,6 @@
 from django.contrib.postgres.fields import JSONField
 from django.db import models
+from django.utils.text import slugify
 
 from .fields import ChoiceArrayField
 
@@ -28,10 +29,15 @@ class ItemOrigin(models.Model):
 
 class Item(models.Model):
     item_id = models.CharField(max_length=30, unique=True)
+    slug = models.SlugField(max_length=30, unique=True)
     name = models.CharField(max_length=30)
     format = ChoiceArrayField(models.CharField(max_length=2, choices=ItemFormat.choices))
     content_area = models.CharField(max_length=2, choices=ContentArea.choices)
     # origin = models.ForeignKey(ItemOrigin, on_delete=models.CASCADE)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.item_id)
+        super(Item, self).save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.item_id} - {self.name.title()}"
