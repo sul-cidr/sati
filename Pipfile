@@ -19,6 +19,7 @@ dj-database-url = "*"
 python-dotenv = "*"
 psycopg2-binary = "*"
 django-baton = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.8"
