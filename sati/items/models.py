@@ -1,8 +1,31 @@
+import os
+import re
+from pathlib import Path
+
 from django.contrib.postgres.fields import JSONField
 from django.db import models
 from django.utils.text import slugify
 
 from .fields import ChoiceArrayField
+
+
+class UploadTo:
+    def __init__(self, fieldname):
+        self.fieldname = fieldname
+
+    def __call__(self, instance, filename):
+        folder = Path(instance.slug)
+        max_length = instance._meta.get_field(self.fieldname).max_length
+
+        # modified from django.utils.text.get_valid_filename
+        filename = str(filename).strip().replace("/", "_")
+        filename = re.sub(r"(?u)[^-\w.,]", "", filename)
+        base, ext = os.path.splitext(filename)
+        return folder / f"{base[: max_length - (len(folder.name) + len(ext) + 1)]}{ext}"
+
+    # required to make this class serializable for migrations
+    def deconstruct(self):
+        return ("sati.items.models.UploadTo", [self.fieldname], {})
 
 
 class ItemFormat(models.TextChoices):
@@ -33,7 +56,7 @@ class Item(models.Model):
     name = models.CharField(max_length=30)
     format = ChoiceArrayField(models.CharField(max_length=2, choices=ItemFormat.choices))
     content_area = models.CharField(max_length=2, choices=ContentArea.choices)
-    # origin = models.ForeignKey(ItemOrigin, on_delete=models.CASCADE)
+    main_image = models.ImageField(upload_to=UploadTo("main_image"), max_length=255)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.item_id)
