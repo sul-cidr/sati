@@ -61,3 +61,11 @@ ul.choice-array-field li {
 label[for="id_main_image"] {
   display: none;
 }
+
+.column-requires_attention {
+  max-width: 35px;
+}
+
+.field-requires_attention {
+  text-align: center;
+}
