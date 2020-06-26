@@ -25,8 +25,8 @@ class ItemFormatFilter(admin.SimpleListFilter):
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ("item_id", "name", "content_area", "format")
-    list_filter = ("content_area", ItemFormatFilter)
+    list_display = ("item_id", "name", "content_area", "format", "requires_attention")
+    list_filter = ("requires_attention", "content_area", ItemFormatFilter)
     search_fields = ("item_id", "name")
 
     inlines = [ItemCodingInline]
@@ -35,7 +35,13 @@ class ItemAdmin(admin.ModelAdmin):
         (
             "Item",
             {
-                "fields": ("item_id", "name", "content_area", "format"),
+                "fields": (
+                    "item_id",
+                    "name",
+                    "content_area",
+                    "format",
+                    "requires_attention",
+                ),
                 "classes": ("baton-tabs-init", "baton-tab-inline-itemcoding"),
             },
         ),
