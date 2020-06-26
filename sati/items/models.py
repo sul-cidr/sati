@@ -57,6 +57,7 @@ class Item(models.Model):
     format = ChoiceArrayField(models.CharField(max_length=2, choices=ItemFormat.choices))
     content_area = models.CharField(max_length=2, choices=ContentArea.choices)
     main_image = models.ImageField(upload_to=UploadTo("main_image"), max_length=255)
+    requires_attention = models.BooleanField()
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.item_id)
