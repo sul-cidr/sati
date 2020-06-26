@@ -51,13 +51,15 @@ class ItemOrigin(models.Model):
 
 
 class Item(models.Model):
-    item_id = models.CharField(max_length=30, unique=True)
+    item_id = models.CharField(max_length=30, unique=True, verbose_name="Item ID")
     slug = models.SlugField(max_length=30, unique=True)
     name = models.CharField(max_length=30)
     format = ChoiceArrayField(models.CharField(max_length=2, choices=ItemFormat.choices))
-    content_area = models.CharField(max_length=2, choices=ContentArea.choices)
+    content_area = models.CharField(
+        max_length=2, choices=ContentArea.choices, verbose_name="Content Area"
+    )
     main_image = models.ImageField(upload_to=UploadTo("main_image"), max_length=255)
-    requires_attention = models.BooleanField()
+    requires_attention = models.BooleanField(verbose_name="Requires Attention?")
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.item_id)
@@ -65,6 +67,9 @@ class Item(models.Model):
 
     def __str__(self):
         return f"{self.item_id} - {self.name.title()}"
+
+    class Meta:
+        ordering = ["id"]
 
 
 class ItemCoding(models.Model):
