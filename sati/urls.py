@@ -4,9 +4,11 @@ from baton.autodiscover import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
 
+from sati.items.views import AdminRedirect
 from sati.users.views import EnforcePasswordChangeLoginView
 
 urlpatterns = [
+    path("items/<path:id>/", AdminRedirect.as_view()),
     path("admin/login/", EnforcePasswordChangeLoginView.as_view()),
     path("admin/", admin.site.urls),
     path("baton/", include("baton.urls")),
