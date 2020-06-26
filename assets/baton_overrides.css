@@ -2,6 +2,7 @@
  *  but this is sufficient for now.
  */
 
+/* Change the base font */
 body {
   font-family: "Heebo", sans-serif !important;
   overflow-y: scroll;
@@ -11,9 +12,13 @@ th,
 .change-form #content-main > form .required,
 .passwordchange #content-main > form .required,
 .nav-tabs .nav-link {
+  /* the GWF import declaration pulls in a variant with a weight of 500,
+   * not a true bold (700), and so `font-weight: bold` looks awful.
+   */
   font-weight: 500 !important;
 }
 
+/* Footer stuff */
 .site-footer a {
   display: flex;
   align-items: center;
@@ -25,6 +30,7 @@ th,
   margin-right: 10px;
 }
 
+/* Make text-areas full sized */
 .change-form #content-main > form .tabular.inline-related textarea {
   width: 100% !important;
 }
@@ -33,7 +39,7 @@ th,
   flex: 1 0 auto;
 }
 
-/* */
+/* Array field (generic) */
 ul.choice-array-field {
   list-style: none;
   padding: 0;
@@ -43,7 +49,7 @@ ul.choice-array-field li {
   display: inline-block;
 }
 
-/* */
+/* Gravatar-related */
 .change-list .results table th,
 .change-list .results table td {
   vertical-align: middle !important;
@@ -53,6 +59,7 @@ ul.choice-array-field li {
   width: 50px;
 }
 
+/* Main images on Item change pages */
 .field-main_image .baton-image-preview {
   height: auto !important;
   max-width: 100%;
@@ -62,6 +69,7 @@ label[for="id_main_image"] {
   display: none;
 }
 
+/* Requires attention field in list view */
 .column-requires_attention {
   max-width: 35px;
 }
