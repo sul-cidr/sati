@@ -41,6 +41,7 @@ class ItemAdmin(admin.ModelAdmin):
                     "content_area",
                     "format",
                     "requires_attention",
+                    "notes",
                 ),
                 "classes": ("baton-tabs-init", "baton-tab-inline-itemcoding"),
             },
