@@ -1,6 +1,6 @@
 BATON = {
-    "SITE_HEADER": "SATI - Semiotic Analysis of Test Items",
-    "SITE_TITLE": "SATI - Semiotic Analysis of Test Items",
+    "SITE_HEADER": "SATI :: Database Administration",
+    "SITE_TITLE": "SATI :: Database Administration",
     "INDEX_TITLE": "Database Administration",
     "CONFIRM_UNSAVED_CHANGES": True,
     "SHOW_MULTIPART_UPLOADING": True,
