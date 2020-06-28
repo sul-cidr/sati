@@ -22,6 +22,19 @@
         {% baton_config 'MENU_TITLE' as menu_title %}
         (function ($, undefined) {
             $(window).on('load', function () {
+                Baton.Dispatcher.register('onMenuReady', function () {
+                    const link = document.querySelector(
+                        ".sidebar-menu a[href='" +
+                        window.location.pathname +
+                        window.location.search +
+                        "']");
+                    if (link) {
+                        for (let item of document.querySelectorAll('.sidebar-menu li.active')) {
+                            item.classList.remove('active');
+                        };
+                        link.parentElement.classList.add('active');
+                    }
+                });
                 Baton.init({
                     api: {
                         app_list: '{% url 'baton-app-list-json' %}'
