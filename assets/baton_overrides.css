@@ -11,7 +11,8 @@ body {
 th,
 .change-form #content-main > form .required,
 .passwordchange #content-main > form .required,
-.nav-tabs .nav-link {
+.nav-tabs .nav-link,
+.sidebar-menu .depth-0 .title > span {
   /* the GWF import declaration pulls in a variant with a weight of 500,
    * not a true bold (700), and so `font-weight: bold` looks awful.
    */
