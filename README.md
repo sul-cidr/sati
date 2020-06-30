@@ -26,7 +26,12 @@ With a working version of Python 3.8 and Pipenv:
 	$ pipenv run python manage.py createsuperuser
 	```
 
-4. Start development server and go to `http://localhost:8000/admin/`.
+4. Collect static files from installed apps.
+  ```
+	$ pipenv run python manage.py collectstatic
+	```
+
+5. Start development server and go to `http://localhost:8000/admin/`.
 	```
 	$ pipenv run python manage.py runserver localhost:8000
 	```
