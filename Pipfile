@@ -20,6 +20,7 @@ python-dotenv = "*"
 psycopg2-binary = "*"
 django-baton = "*"
 pillow = "*"
+django-pagedown = "*"
 
 [requires]
 python_version = "3.8"
