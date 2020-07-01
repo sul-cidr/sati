@@ -1,0 +1,90 @@
+<div id="wmd-wrapper-{{ widget.attrs.id }}" class="wmd-wrapper">
+
+    <div class="wmd-panel">
+        <div class="wmd-toolbar">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#wmd-preview-{{ widget.attrs.id }}">Preview</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#wmd-edit-{{ widget.attrs.id }}">Write</a>
+                </li>
+            </ul>
+            <div id="wmd-button-bar-{{ widget.attrs.id }}" class="wmd-button-bar" style="display: none;"></div>
+        </div>
+        <div class="tab-content">
+            <div id="wmd-preview-{{ widget.attrs.id }}" class="wmd-preview tab-pane active"></div>
+            <div id="wmd-edit-{{ widget.attrs.id }}" class="tab-pane">
+                {% include 'pagedown/forms/widgets/textarea.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    jQuery('a[data-toggle="tab"]').on('shown.bs.tab', (evt) => {
+        jQuery(".wmd-button-bar").toggle();
+        jQuery("#wmd-edit-{{ widget.attrs.id }} textarea").focus();
+    });
+</script>
+
+<style>
+#wmd-wrapper-{{ widget.attrs.id }} {
+  margin: -0.25em auto 0;
+  width: 90%;
+}
+
+#wmd-wrapper-{{ widget.attrs.id }} .wmd-toolbar {
+  display: flex;
+  justify-content: space-between;
+  background: white;
+  border: 1px solid #ced4da;
+  border-radius: 0.25em 0.25em 0 0;
+  overflow: hidden;
+}
+
+#wmd-wrapper-{{ widget.attrs.id }} .nav {
+  flex: 1 0 auto;
+}
+
+#wmd-wrapper-{{ widget.attrs.id }} .nav-link {
+  background: #fafafa;
+  border-right: 1px solid #ced4da;
+  font-weight: 500;
+}
+#wmd-wrapper-{{ widget.attrs.id }} .nav-link.active {
+  background: white;
+  color: #495057;
+}
+
+#wmd-wrapper-{{ widget.attrs.id }} .wmd-button-bar {
+  width: auto;
+  flex: 1 1 auto;
+}
+
+#wmd-wrapper-{{ widget.attrs.id }} .tab-content {
+  padding: 0;
+}
+
+#wmd-wrapper-{{ widget.attrs.id }} .wmd-preview {
+  background: #f9f9f9;
+  border: 1px solid #ced4da;
+  border-radius: 0 0 0.25em 0.25em;
+  height: 4em;
+  margin: -1px 0 0;
+  max-width: unset;
+}
+
+#wmd-wrapper-{{ widget.attrs.id }} textarea {
+  border-radius: 0 0 0.25em 0.25em !important;
+  height: 4em !important;
+  margin-top: -1px !important;
+  resize: vertical !important;
+  width: 100% !important;
+}
+
+#wmd-image-button-{{ widget.attrs.id }} {
+  display: none;
+}
+
+</style>

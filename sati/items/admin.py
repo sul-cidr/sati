@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db import models
 
-from pagedown.widgets import AdminPagedownWidget
+from sati.widgets import AdminPagedownWidget
 from sati.items.models import Item, ItemCoding, ItemFormat
 
 
