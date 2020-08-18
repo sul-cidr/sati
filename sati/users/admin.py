@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import Group
@@ -6,16 +7,16 @@ from django.utils.translation import gettext_lazy as _
 
 from .models import User
 
-
 import hashlib
 import urllib
 
 
 def gravatar_url(email, size=50):
     # urllib.parse.urlencode({"d": "/static/images/defaultavatar.jpg", "s": str(size)}),
-    return "https://www.gravatar.com/avatar/{}?{}".format(
+    return "https://www.gravatar.com/avatar/{}?{}&d={}".format(
         hashlib.md5(email.lower().encode("utf8")).hexdigest(),
         urllib.parse.urlencode({"s": str(size)}),
+        settings.BATON.get("GRAVATAR_DEFAULT_IMG", "retro"),
     )
 
 
