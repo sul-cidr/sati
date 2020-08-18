@@ -14,7 +14,7 @@ django-debug-toolbar = "*"
 ipython = "*"
 
 [packages]
-django = "==3.0.*"
+django = "==3.1.*"
 dj-database-url = "*"
 python-dotenv = "*"
 psycopg2-binary = "*"
