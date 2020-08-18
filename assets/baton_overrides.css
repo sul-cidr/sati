@@ -8,6 +8,10 @@ body {
   overflow-y: scroll;
 }
 
+#branding {
+  white-space: normal !important;
+}
+
 th,
 .change-form #content-main > form .required,
 .passwordchange #content-main > form .required,

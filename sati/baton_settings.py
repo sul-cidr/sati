@@ -1,5 +1,5 @@
 BATON = {
-    "SITE_HEADER": "SATI :: Database Administration",
+    "SITE_HEADER": "SATI :: Database&nbsp;Administration",
     "SITE_TITLE": "SATI :: Database Administration",
     "INDEX_TITLE": "Database Administration",
     "CONFIRM_UNSAVED_CHANGES": True,
