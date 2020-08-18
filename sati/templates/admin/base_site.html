@@ -24,6 +24,7 @@
         (function ($, undefined) {
             $(window).on('load', function () {
                 Baton.Dispatcher.register('onMenuReady', function () {
+                    if (window.location.pathname === "/admin/") return;
                     const link = document.querySelector(
                         ".sidebar-menu a[href='" +
                         window.location.pathname +
