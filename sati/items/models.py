@@ -39,7 +39,7 @@ class ItemFormat(models.TextChoices):
 class ContentArea(models.TextChoices):
     EARTH_SCIENCE = "ES", "Earth Science"
     LIFE_SCIENCE = "LS", "Life Science"
-    PHYSCIAL_SCIENCE = "PS", "Physical Science"
+    PHYSICAL_SCIENCE = "PS", "Physical Science"
 
 
 class CodingScheme(models.TextChoices):
