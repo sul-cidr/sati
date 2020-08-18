@@ -2,7 +2,6 @@ import os
 import re
 from pathlib import Path
 
-from django.contrib.postgres.fields import JSONField
 from django.db import models
 from django.utils.text import slugify
 
@@ -39,7 +38,7 @@ class ItemFormat(models.TextChoices):
 class ContentArea(models.TextChoices):
     EARTH_SCIENCE = "ES", "Earth Science"
     LIFE_SCIENCE = "LS", "Life Science"
-    PHYSCIAL_SCIENCE = "PS", "Physical Science"
+    PHYSICAL_SCIENCE = "PS", "Physical Science"
 
 
 class CodingScheme(models.TextChoices):
@@ -47,7 +46,7 @@ class CodingScheme(models.TextChoices):
 
 
 class ItemOrigin(models.Model):
-    origin = JSONField()
+    origin = models.JSONField()
 
 
 class Item(models.Model):
@@ -76,7 +75,7 @@ class Item(models.Model):
 class ItemCoding(models.Model):
     coding_source = models.CharField(max_length=30)
     coding_scheme = models.CharField(max_length=2, choices=CodingScheme.choices)
-    coding = JSONField()
+    coding = models.JSONField()
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
 
     def __str__(self):
