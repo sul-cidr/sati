@@ -1,11 +1,7 @@
 from django import forms
 from django.contrib.postgres.fields import ArrayField
-from django.forms import CheckboxSelectMultiple
 
-
-class ArraySelectMultiple(CheckboxSelectMultiple):
-    def value_omitted_from_data(self, data, files, name):
-        return False
+from .widgets import ArraySelectMultiple
 
 
 class ChoiceArrayField(ArrayField):
