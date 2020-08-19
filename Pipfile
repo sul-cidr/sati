@@ -12,6 +12,7 @@ flake8-fixme = "*"
 django-extensions = "*"
 django-debug-toolbar = "*"
 ipython = "*"
+ipdb = "*"
 
 [packages]
 django = "==3.1.*"
