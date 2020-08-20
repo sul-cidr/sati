@@ -5,7 +5,7 @@ from pathlib import Path
 from django.db import models
 from django.utils.text import slugify
 
-from .fields import ChoiceArrayField, JSONSchemaField
+from .fields import ChoiceArrayField, CodingField
 
 
 class UploadTo:
@@ -42,7 +42,7 @@ class ContentArea(models.TextChoices):
 
 
 class CodingScheme(models.TextChoices):
-    WANG = "WC", "Wang, C. (2012)"
+    WANG_2012 = "WC", "Wang, C. (2012)"
 
 
 class ItemOrigin(models.Model):
@@ -75,7 +75,7 @@ class Item(models.Model):
 class ItemCoding(models.Model):
     coding_source = models.CharField(max_length=30)
     coding_scheme = models.CharField(max_length=2, choices=CodingScheme.choices)
-    coding = JSONSchemaField(schema="sati/items/schema/wang_2012.json")
+    coding = CodingField()
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
 
     def __str__(self):
