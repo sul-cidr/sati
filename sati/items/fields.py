@@ -1,11 +1,11 @@
 import json
 from pathlib import Path
 
-from jsonschema import validate, exceptions as jsonschema_exceptions
+import jsonschema
 
 from django import forms
 from django.conf import settings
-from django.core import exceptions
+from django.core.exceptions import ValidationError
 from django.contrib.postgres.fields import ArrayField
 from django.contrib.postgres.fields import JSONField
 from django.utils.text import slugify
@@ -41,9 +41,9 @@ class JSONSchemaField(JSONField):
         if self.model.__module__ == "__fake__":
             return True
         try:
-            status = validate(value, self._schema_data)
-        except jsonschema_exceptions.ValidationError as exp:
-            raise exceptions.ValidationError(str(exp), code="invalid")
+            status = jsonschema.validate(value, self._schema_data)
+        except jsonschema.ValidationError as exp:
+            raise ValidationError(str(exp), code="invalid")
         return status
 
     def validate(self, value, model_instance):
