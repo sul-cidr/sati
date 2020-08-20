@@ -16,22 +16,22 @@ With a working version of Python 3.8 and Pipenv:
 	$ pre-commit install
 	```
 
-2. Create a database (if not created yet) and migrate.  Only PostgreSQL is supported.  A `DATABASE_URL` can be defined in a `.env` file or set as an environment variable. See [`.env_tempate`](.env_template) and [here](https://github.com/kennethreitz/dj-database-url#url-schema) for details.
+3. Create a database (if not created yet) and migrate.  Only PostgreSQL is supported.  A `DATABASE_URL` can be defined in a `.env` file or set as an environment variable. See [`.env_tempate`](.env_template) and [here](https://github.com/kennethreitz/dj-database-url#url-schema) for details.
 	```
 	$ pipenv run python manage.py migrate
 	```
 
-3. Create a superuser.
+4. Create a superuser.
 	```
 	$ pipenv run python manage.py createsuperuser
 	```
 
-4. Collect static files from installed apps.
-  ```
+5. Collect static files from installed apps.
+	```
 	$ pipenv run python manage.py collectstatic
 	```
 
-5. Start development server and go to `http://localhost:8000/admin/`.
+6. Start development server and go to `http://localhost:8000/admin/`.
 	```
 	$ pipenv run python manage.py runserver localhost:8000
 	```
