@@ -12,6 +12,8 @@ body {
   white-space: normal !important;
 }
 
+b,
+strong,
 th,
 .change-form #content-main > form .required,
 .passwordchange #content-main > form .required,
