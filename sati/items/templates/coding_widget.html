@@ -1,0 +1,19 @@
+{% comment %} <span>Coding scheme: {{ widget.attrs.coding_scheme }}</span> {% endcomment %}
+<div>
+{% for dimension_id, widget in widget.attrs.widgets.items %}
+    {{ widget.html | safe }}
+    <label for="{{ widget.id }}"><strong>{{ widget.dimension_id }}</strong> {{ widget.label }}</label>
+    <br>
+{% endfor %}
+</div>
+
+<details style="background: #eaeaea;
+                border-radius: 5px;
+                border: 1px solid black;
+                display: block;
+                margin-top: 1em;
+                padding: .5em;
+                width: 100%;">"
+    <summary>debug</summary>
+    <code>{{ widget.value }}</code>
+</details>
