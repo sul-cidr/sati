@@ -64,8 +64,15 @@ class CodingField(JSONSchemaField):
            `instance.coding_schema`.
     """
 
-    def pre_save(self, model_instance, add):
+    def _set_schema(self, model_instance):
         schema = model_instance.get_coding_scheme_display()
         self.schema = f"sati/items/schemas/{slugify(schema)}.json"
+
+    def validate(self, value, model_instance):
+        self._set_schema(model_instance)
+        super().validate(value, model_instance)
+
+    def pre_save(self, model_instance, add):
+        self._set_schema(model_instance)
         value = super().pre_save(model_instance, add)
         return value
