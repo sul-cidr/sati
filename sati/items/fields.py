@@ -8,6 +8,7 @@ from django.conf import settings
 from django.core import exceptions
 from django.contrib.postgres.fields import ArrayField
 from django.contrib.postgres.fields import JSONField
+from django.utils.text import slugify
 
 from .widgets import ArraySelectMultiple
 
@@ -59,24 +60,12 @@ class JSONSchemaField(JSONField):
 class CodingField(JSONSchemaField):
     """ This field inherits from JSONSchemaField (defined above in this module) and does
         one extra thing:
-        1) it does some ugly dynamic work to set the schema for validation based on the
-           value of instance.coding_schema (this should be redone at some point, in a
-           better way).
+        1) it sets the schema for validation based on the value of
+           `instance.coding_schema`.
     """
 
     def pre_save(self, model_instance, add):
-        # This is all to get the member name from the Enum value
-        # -- clearly this is not very good.
-        from .models import CodingScheme
-
-        schema = next(
-            iter(
-                k
-                for k, v in CodingScheme.__members__.items()
-                if v == model_instance.coding_scheme
-            )
-        )
-
-        self.schema = f"sati/items/schemas/{schema.lower()}.json"
+        schema = model_instance.get_coding_scheme_display()
+        self.schema = f"sati/items/schemas/{slugify(schema)}.json"
         value = super().pre_save(model_instance, add)
         return value
