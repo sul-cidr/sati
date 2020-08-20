@@ -10,7 +10,7 @@ from django.contrib.postgres.fields import ArrayField
 from django.contrib.postgres.fields import JSONField
 from django.utils.text import slugify
 
-from .widgets import ArraySelectMultiple
+from .widgets import ArraySelectMultiple, CodingWidget
 
 
 class ChoiceArrayField(ArrayField):
@@ -59,9 +59,11 @@ class JSONSchemaField(JSONField):
 
 class CodingField(JSONSchemaField):
     """ This field inherits from JSONSchemaField (defined above in this module) and does
-        one extra thing:
+        two extra things:
         1) it sets the schema for validation based on the value of
-           `instance.coding_schema`.
+           `instance.coding_schema`; and
+        2) it overrides the formfield method to specify using a JSONField and the custom
+           CodingWidget.
     """
 
     def _set_schema(self, model_instance):
@@ -76,3 +78,8 @@ class CodingField(JSONSchemaField):
         self._set_schema(model_instance)
         value = super().pre_save(model_instance, add)
         return value
+
+    def formfield(self, **kwargs):
+        return super().formfield(
+            **{"form_class": forms.JSONField, "widget": CodingWidget(), **kwargs}
+        )
