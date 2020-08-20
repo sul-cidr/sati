@@ -22,6 +22,7 @@ psycopg2-binary = "*"
 django-baton = "==1.10.8"
 pillow = "*"
 django-pagedown = "*"
+jsonschema = "*"
 
 [requires]
 python_version = "3.8"
