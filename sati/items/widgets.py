@@ -47,7 +47,7 @@ class CodingWidget(forms.MultiWidget):
             for (key, value) in data.items()
             if key.startswith(f"{name}_dimension")
         }
-        self._get_dimensions(self.instance)
+        self._get_dimensions(self.model_instance)
         return json.dumps(
             {
                 dimension_id: int(f"{name}_dimension_{dimension_id}" in boxes_checked)
@@ -61,7 +61,7 @@ class CodingWidget(forms.MultiWidget):
         if value is not None and value != "null":
             coding = json.loads(value)
 
-        self._get_dimensions(self.instance)
+        self._get_dimensions(self.model_instance)
 
         widgets = {}
         for dimension_id, label in self.dimensions.items():
@@ -79,7 +79,7 @@ class CodingWidget(forms.MultiWidget):
         attrs = {
             **attrs,
             **{
-                "coding_scheme": self.instance.coding_scheme,
+                "coding_scheme": self.model_instance.get_coding_scheme_display(),
                 "dimensions": self.dimensions,
                 "widgets": widgets,
             },
