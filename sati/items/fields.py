@@ -7,7 +7,7 @@ from django import forms
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.contrib.postgres.fields import ArrayField
-from django.contrib.postgres.fields import JSONField
+from django.db.models import JSONField
 from django.utils.text import slugify
 
 from .widgets import ArraySelectMultiple, CodingWidget
