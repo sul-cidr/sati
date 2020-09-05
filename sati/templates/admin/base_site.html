@@ -37,10 +37,6 @@
                         link.parentElement.classList.add('active');
                     }
                 });
-                Baton.Dispatcher.register('onReady', function () {
-                    $('a[href="#main"]').attr('href', '#main-tab')
-                    $('div#main.tab-pane').attr('id','main-tab');
-                 })
                 Baton.init({
                     api: {
                         app_list: '{% url 'baton-app-list-json' %}',
