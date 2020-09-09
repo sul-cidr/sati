@@ -36,8 +36,8 @@ class CodingWidget(forms.MultiWidget):
         }
 
     def decompress(self, value):
-        # if value is not None and value != "null":
-        #     return [bool(_) for _ in json.loads(value).values()]
+        # Note: failing to implement this method causes a NotImplementedError to be
+        # raised, but we're not actually using it...
 
         return [None] * len(self.dimensions)
 
