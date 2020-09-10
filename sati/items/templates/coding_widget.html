@@ -17,6 +17,7 @@
 {% endfor %}
 </div>
 
+{% if debug %}
 <details style="background: #eaeaea;
                 border-radius: 5px;
                 border: 1px solid black;
@@ -27,6 +28,7 @@
     <summary>debug</summary>
     <code>{{ widget.value }}</code>
 </details>
+{% endif %}
 
 <style>
 .coding-widget {
