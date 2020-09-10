@@ -1,0 +1,27 @@
+name: Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache
+        uses: actions/cache@v2.1.1
+        with:
+          path: $GITHUB_WORKSPACE/.venv
+          key: ${{ hashFiles('Pipfile.lock') }}
+      - name: Install dependencies
+        run: |
+          PIPENV_VENV_IN_PROJECT=1 pipenv sync --dev
+      - name: Linting and static analysis
+        run: |
+          pipenv run pre-commit run --all-files
+      - name: Run tests
+        run: |
+          pipenv run python manage.py test
