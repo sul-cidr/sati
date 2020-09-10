@@ -2,14 +2,14 @@
   "1. Objects and background": {
     "1.1. Image concreteness": [
       "1.1.1 photograph",
-      "1.1.2 scanned document/ text clip",
+      "1.1.2 scanned document/text clip",
       "1.1.3",
       "1.1.4 realistic line drawing",
       "1.1.5 schematic",
       "1.1.6 map",
       "1.1.7 silhouette",
       "1.1.8 cartoon",
-      "1.1.9 logo/icon/ metonymy",
+      "1.1.9 logo/icon/metonymy",
       "1.1.10",
       "1.1.11 emblem",
       "1.1.12",
@@ -85,7 +85,7 @@
     ]
   },
   "3. Text in illustration": {
-    "3.1. Text unit  ": [
+    "3.1. Text unit": [
       "3.1.1 non--scientific/mathematical sign",
       "3.1.2 scientific/math sign, and notation",
       "3.1.3 abbreviation",
@@ -93,10 +93,10 @@
       "3.1.5 Arabic numeral",
       "3.1.6 letter",
       "3.1.7 word 词",
-      "3.1.8 phrase短语",
-      "3.1.9 sentence句子",
-      "3.1.10 paragraph段落",
-      "3.1.11 acronym/缩略语",
+      "3.1.8 phrase 短语",
+      "3.1.9 sentence 句子",
+      "3.1.10 paragraph 段落",
+      "3.1.11 acronym 缩略语",
       "3.1.50 other"
     ],
     "3.2. Text function": [
@@ -129,7 +129,7 @@
     "4.1. Variables and constants": [
       "4.1.1 cases/facts/events",
       "4.1.2 categories",
-      "4.1.3 conditions/ treatments/ properties/ locations",
+      "4.1.3 conditions/treatments/properties/locations",
       "4.1.4 stages (not continuous)",
       "4.1.5 levels",
       "4.1.6 analogic line",
@@ -161,9 +161,9 @@
   "5. Illustration-text interaction": {
     "5.1. Location of illustration": [
       "5.1.1 above stem/prompt",
-      "5.1.2 between stem/prompt and options/ response format",
+      "5.1.2 between stem/prompt and options/response format",
       "5.1.3 embedded in stem/prompt",
-      "5.1.4 embedded in options/ response format",
+      "5.1.4 embedded in options/response format",
       "5.1.5 on the left of the text",
       "5.1.6 on the right of the text",
       "5.1.7",
@@ -185,8 +185,8 @@
     ],
     "5.4. Commonality": [
       "5.4.1 part of a stand-alone item",
-      "5.4.2 same illutr for several items",
-      "5.4.3 illustration for 1 item within a series of  related items",
+      "5.4.2 same illustration for several items",
+      "5.4.3 illustration for 1 item within a series of related items",
       "5.4.50 other"
     ]
   },
@@ -194,7 +194,7 @@
     "6.1. Physical context": [
       "6.1.1 undefined person(s)",
       "6.1.2 peers/teacher(s)",
-      "6.1.3 media figures (e.g. cartoon)",
+      "6.1.3 media figures (e.g., cartoon)",
       "6.1.4 family/home",
       "6.1.5 school/class/lab/gym",
       "6.1.6 community/neighborhood",
@@ -212,7 +212,7 @@
     ],
     "6.3. Human figure": [
       "6.3.1 complete human figure",
-      "6.3.2 partial human figure (e.g. a head)",
+      "6.3.2 partial human figure (e.g., a head)",
       "6.3.3 one human figure",
       "6.3.4 two or more human figures",
       "6.3.50 other"
