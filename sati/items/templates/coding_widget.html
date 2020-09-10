@@ -1,4 +1,3 @@
-{% comment %} <span>Coding scheme: {{ widget.attrs.coding_scheme }}</span> {% endcomment %}
 <div class="coding-widget">
 {% for title, subsections in widget.attrs.sections.items %}
 <div class="section">
@@ -50,19 +49,16 @@
 .coding-widget h3 {
   background: #fafafa !important;
   font-size: 1.25rem !important;
-
 }
 
 .coding-widget h4 {
   font-size: 1.1rem;
 }
 
-
 .coding-widget .dimension {
   align-items: baseline;
   display: flex;
 }
-
 
 .coding-widget .dimension label {
   flex-grow: 1;
