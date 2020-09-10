@@ -43,7 +43,14 @@ class UserAdmin(UserAdmin):
         (_("Personal info"), {"fields": ("first_name", "last_name")}),
         (
             _("Permissions"),
-            {"fields": ("is_active", "is_staff", "is_superuser", "user_permissions",)},
+            {
+                "fields": (
+                    "is_active",
+                    "is_staff",
+                    "is_superuser",
+                    "user_permissions",
+                )
+            },
         ),
     )
     add_fieldsets = (

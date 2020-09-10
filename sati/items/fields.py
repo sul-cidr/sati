@@ -58,12 +58,12 @@ class JSONSchemaField(JSONField):
 
 
 class CodingField(JSONSchemaField):
-    """ This field inherits from JSONSchemaField (defined above in this module) and does
-        two extra things:
-        1) it sets the schema for validation based on the value of
-           `instance.coding_schema`; and
-        2) it overrides the formfield method to specify using a JSONField and the custom
-           CodingWidget.
+    """This field inherits from JSONSchemaField (defined above in this module) and does
+    two extra things:
+    1) it sets the schema for validation based on the value of
+       `instance.coding_schema`; and
+    2) it overrides the formfield method to specify using a JSONField and the custom
+       CodingWidget.
     """
 
     def _set_schema(self, model_instance):

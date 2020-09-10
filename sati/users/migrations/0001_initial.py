@@ -118,6 +118,9 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
-            options={"verbose_name": "User", "verbose_name_plural": "Users",},
+            options={
+                "verbose_name": "User",
+                "verbose_name_plural": "Users",
+            },
         ),
     ]

@@ -14,8 +14,8 @@ class ItemCodingForm(forms.ModelForm):
         fields = "__all__"
 
     def __init__(self, *args, **kwargs):
-        """ The model instance is passed here in order to have access to the coding
-            scheme in the CodingWidget. """
+        """The model instance is passed here in order to have access to the coding
+        scheme in the CodingWidget."""
         super(ItemCodingForm, self).__init__(*args, **kwargs)
         self.fields["coding"].widget.model_instance = self.instance
 
