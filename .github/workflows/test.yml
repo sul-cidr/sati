@@ -16,11 +16,14 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: sati
+          POSTGRES_DB: postgres
         ports:
           - 5432:5432
         # needed because the postgres container does not provide a healthcheck
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    env:
+      DATABASE_URL: "postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres"
 
     steps:
       - uses: actions/checkout@v2
@@ -44,7 +47,7 @@ jobs:
           pipenv run pre-commit run --all-files
       - name: Initialize DB
         run: |
-          DATABASE_URL=postgres://postgres:postgres@localhost:5432/sati pipenv run python manage.py migrate
+          pipenv run python manage.py migrate
       - name: Run tests
         run: |
-          DATABASE_URL=postgres://postgres:postgres@localhost:5432/sati pipenv run python manage.py test
+          pipenv run python manage.py test
