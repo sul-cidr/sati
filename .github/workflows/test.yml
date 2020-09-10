@@ -22,9 +22,6 @@ jobs:
         # needed because the postgres container does not provide a healthcheck
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
-    env:
-      DATABASE_URL: "postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres"
-
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python 3.8
@@ -46,8 +43,12 @@ jobs:
         run: |
           pipenv run pre-commit run --all-files
       - name: Initialize DB
+        env:
+          DATABASE_URL: "postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres"
         run: |
           pipenv run python manage.py migrate
       - name: Run tests
+        env:
+          DATABASE_URL: "postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres"
         run: |
           pipenv run python manage.py test
