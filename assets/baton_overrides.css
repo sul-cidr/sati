@@ -88,3 +88,8 @@ label[for="id_main_image"] {
 .inline-related h3 > .inline_label {
   margin-left: 1em;
 }
+
+/* Label for the coding widget */
+div[id|="itemcoding_set"] .field-coding > div > label {
+  display: none;
+}
