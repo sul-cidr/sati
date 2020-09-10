@@ -33,7 +33,7 @@ jobs:
         with:
           path: |
             ~/.cache/pip
-            ~/.venv
+            .venv
           key: ${{ runner.os }}-${{ hashFiles('Pipfile.lock') }}
       - name: Install dependencies
         run: |
