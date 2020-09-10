@@ -38,8 +38,7 @@ jobs:
           sudo pip install pipenv
           PIPENV_VENV_IN_PROJECT=1 pipenv sync --dev
       - name: Linting and static analysis
-        run: |
-          pipenv run pre-commit run --all-files
+        uses: pre-commit/action@v2.0.0
       - name: Initialize DB
         env:
           DATABASE_URL: "postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres"
