@@ -34,7 +34,7 @@ jobs:
       - name: Cache
         uses: actions/cache@v2.1.1
         with:
-          path: $GITHUB_WORKSPACE/.venv
+          path: .venv
           key: ${{ hashFiles('Pipfile.lock') }}
       - name: Install dependencies
         run: |
