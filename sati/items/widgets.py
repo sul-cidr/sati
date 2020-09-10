@@ -20,26 +20,22 @@ class CodingWidget(forms.MultiWidget):
     def __init__(self, attrs=None):
         super(CodingWidget, self).__init__([], attrs)
 
-    def _get_dimensions(self, model_instance):
-        self.dimensions = {}
+    @staticmethod
+    def _get_dimensions(model_instance):
         scheme = model_instance.get_coding_scheme_display()
         if not scheme:
-            return
+            return {}
         dimensions_path = (
             Path(settings.BASE_DIR)
             / f"sati/items/schemas/{slugify(scheme)}_dimensions.json"
         )
-        dimensions = json.load(dimensions_path.open())
-
-        self.dimensions = {
-            k: v for k, v in dimensions.items() if re.match(r"\d+\.\d+\.\d+", k)
-        }
+        return json.load(dimensions_path.open())
 
     def decompress(self, value):
         # Note: failing to implement this method causes a NotImplementedError to be
-        # raised, but we're not actually using it...
+        # raised, even though we're not actually using it...
 
-        return [None] * len(self.dimensions)
+        return None
 
     def value_from_datadict(self, data, files, name):
         boxes_checked = {
@@ -47,11 +43,18 @@ class CodingWidget(forms.MultiWidget):
             for (key, value) in data.items()
             if key.startswith(f"{name}_dimension")
         }
-        self._get_dimensions(self.model_instance)
+        dimensions = self._get_dimensions(self.model_instance)
+        dimension_ids = [
+            dimension.split()[0]
+            for section in dimensions.values()
+            for subsection in section.values()
+            for dimension in subsection
+        ]
+
         return json.dumps(
             {
                 dimension_id: int(f"{name}_dimension_{dimension_id}" in boxes_checked)
-                for dimension_id in self.dimensions
+                for dimension_id in dimension_ids
             }
         )
 
@@ -61,28 +64,34 @@ class CodingWidget(forms.MultiWidget):
         if value is not None and value != "null":
             coding = json.loads(value)
 
-        self._get_dimensions(self.model_instance)
+        dimensions = self._get_dimensions(self.model_instance)
 
-        widgets = {}
-        for dimension_id, label in self.dimensions.items():
-            widget_id = f"{name}_dimension_{dimension_id}"
-            widget = forms.CheckboxInput(attrs={"id": widget_id})
-            widgets[dimension_id] = {
-                "id": widget_id,
-                "html": widget.render(
-                    widget_id, bool(coding.get(dimension_id, False)), widget.attrs,
-                ),
-                "dimension_id": dimension_id,
-                "label": label,
-            }
+        sections = {}
+        for title, subsections in dimensions.items():
+            _subsections = {}
+            for subtitle, _dimensions in subsections.items():
+                widgets = {}
+                for dimension in _dimensions:
+                    dimension_id, label, *_ = dimension.split(maxsplit=1) + [""]
+                    widget_id = f"{name}_dimension_{dimension_id}"
+                    widget = forms.CheckboxInput(attrs={"id": widget_id})
+                    widgets[dimension_id] = {
+                        "id": widget_id,
+                        "html": widget.render(
+                            widget_id,
+                            bool(coding.get(dimension_id, False)),
+                            widget.attrs,
+                        ),
+                        "dimension_id": dimension_id,
+                        "label": label,
+                    }
+
+                _subsections[subtitle] = widgets
+            sections[title] = _subsections
 
         attrs = {
             **attrs,
-            **{
-                "coding_scheme": self.model_instance.get_coding_scheme_display(),
-                "dimensions": self.dimensions,
-                "widgets": widgets,
-            },
+            **{"sections": sections},
         }
         html = super().render(name, value, attrs)
         return mark_safe(html)

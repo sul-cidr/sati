@@ -1,9 +1,20 @@
 {% comment %} <span>Coding scheme: {{ widget.attrs.coding_scheme }}</span> {% endcomment %}
-<div>
-{% for dimension_id, widget in widget.attrs.widgets.items %}
-    {{ widget.html | safe }}
-    <label for="{{ widget.id }}"><strong>{{ widget.dimension_id }}</strong> {{ widget.label }}</label>
-    <br>
+<div class="coding-widget">
+{% for title, subsections in widget.attrs.sections.items %}
+<div class="section">
+    <h3>{{ title }}</h3>
+    {% for subtitle, widgets in subsections.items %}
+    <div class="subsection">
+        <h4>{{ subtitle }}</h4>
+        {% for dimension_id, widget in widgets.items %}
+            <span class="dimension">
+            {{ widget.html | safe }}
+            <label for="{{ widget.id }}"><strong>{{ widget.dimension_id }}</strong> {{ widget.label }}</label>
+            </span>
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>
 {% endfor %}
 </div>
 
@@ -17,3 +28,45 @@
     <summary>debug</summary>
     <code>{{ widget.value }}</code>
 </details>
+
+<style>
+.coding-widget {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.coding-widget .section {
+  flex: 1 1 300px;
+  margin: 25px;
+}
+
+.coding-widget .subsection {
+  padding-left: 1em;
+  margin-bottom: 2em;
+  margin-top: 1em;
+}
+
+.coding-widget h3 {
+  background: #fafafa !important;
+  font-size: 1.25rem !important;
+
+}
+
+.coding-widget h4 {
+  font-size: 1.1rem;
+}
+
+
+.coding-widget .dimension {
+  align-items: baseline;
+  display: flex;
+}
+
+
+.coding-widget .dimension label {
+  flex-grow: 1;
+  margin-left: .5em;
+  text-align: left !important;
+}
+</style>
