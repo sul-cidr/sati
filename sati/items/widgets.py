@@ -43,6 +43,11 @@ class CodingWidget(forms.MultiWidget):
 
         return None
 
+    def get_context(self, name, value, attrs):
+        context = super().get_context(name, value, attrs)
+        context["debug"] = settings.DEBUG
+        return context
+
     def value_from_datadict(self, data, files, name):
         boxes_checked = {
             key: value
