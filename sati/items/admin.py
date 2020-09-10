@@ -2,7 +2,8 @@ from django import forms
 from django.contrib import admin
 from django.db import models
 
-from sati.items.models import Item, ItemCoding, ItemFormat, CodingField
+from sati.items.models import Item, ItemCoding, ItemFormat
+from sati.items.fields import CodingField
 from sati.widgets import AdminPagedownWidget
 
 
