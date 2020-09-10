@@ -1,5 +1,4 @@
 import json
-import re
 from pathlib import Path
 
 from django import forms
