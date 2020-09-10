@@ -31,8 +31,10 @@ jobs:
       - name: Cache
         uses: actions/cache@v2.1.1
         with:
-          path: .venv
-          key: ${{ hashFiles('Pipfile.lock') }}
+          path: |
+            ~/.cache/pip
+            ~/.venv
+          key: ${{ runner.os }}-${{ hashFiles('Pipfile.lock') }}
       - name: Install dependencies
         run: |
           sudo pip install pipenv
