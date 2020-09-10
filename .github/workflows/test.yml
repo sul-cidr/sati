@@ -24,18 +24,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install pipenv
+        run: |
+          sudo pip install pipenv
       - name: Cache
         uses: actions/cache@v2.1.1
         with:
           path: $GITHUB_WORKSPACE/.venv
           key: ${{ hashFiles('Pipfile.lock') }}
-      - name: Set up Python 3.8
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.8
       - name: Install dependencies
         run: |
-          sudo pip install pipenv
           PIPENV_VENV_IN_PROJECT=1 pipenv sync --dev
       - name: Linting and static analysis
         run: |
