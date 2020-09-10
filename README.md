@@ -13,7 +13,7 @@ With a working version of Python 3.8 and Pipenv:
 
 2. Install pre-commit hooks.
 	```
-	$ pre-commit install
+	$ pipenv run pre-commit install
 	```
 
 3. Create a database (if not created yet) and migrate.  Only PostgreSQL is supported.  A `DATABASE_URL` can be defined in a `.env` file or set as an environment variable. See [`.env_tempate`](.env_template) and [here](https://github.com/kennethreitz/dj-database-url#url-schema) for details.
