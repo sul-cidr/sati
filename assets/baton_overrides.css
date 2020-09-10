@@ -84,3 +84,7 @@ label[for="id_main_image"] {
 .field-requires_attention {
   text-align: center;
 }
+
+.inline-related h3 > .inline_label {
+  margin-left: 1em;
+}
