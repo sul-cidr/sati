@@ -18,8 +18,9 @@ urlpatterns = [
 
 from django.conf import settings  # noqa: E402
 from django.conf.urls.static import static  # noqa: E402
-import debug_toolbar  # noqa: E402
 
 if settings.DEBUG is True:
+    import debug_toolbar  # noqa: E402
+
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += [path("__debug__/", include(debug_toolbar.urls))]
