@@ -14,6 +14,13 @@ class ArraySelectMultiple(CheckboxSelectMultiple):
 
 
 class CodingWidget(forms.MultiWidget):
+    """This widget presents the JSON dict of coding dimensions in a nice layout
+    according to the appropriate dimensions file found in sati/items/schemas/.
+    It depends on self.model_instance to find the appropriate coding scheme --
+    this is not normally available to a widget, but is passed in here from the
+    custom ItemCodingForm defined in sati.items.admin which invokes the widget.
+    """
+
     template_name = "coding_widget.html"
 
     def __init__(self, attrs=None):
@@ -88,9 +95,6 @@ class CodingWidget(forms.MultiWidget):
                 _subsections[subtitle] = widgets
             sections[title] = _subsections
 
-        attrs = {
-            **attrs,
-            **{"sections": sections},
-        }
+        attrs = {**attrs, **{"sections": sections}}
         html = super().render(name, value, attrs)
         return mark_safe(html)
