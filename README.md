@@ -1,5 +1,5 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-![Test](https://github.com/sul-cidr/sati/workflows/Test/badge.svg)
+[![Test](https://github.com/sul-cidr/sati/workflows/Test/badge.svg)](https://github.com/sul-cidr/sati/actions?query=workflow%3ATest)
 
 # Semiotic Analysis of Test Items
 
