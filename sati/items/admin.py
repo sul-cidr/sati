@@ -19,6 +19,7 @@ class ItemCodingForm(forms.ModelForm):
         scheme in the CodingWidget."""
         super(ItemCodingForm, self).__init__(*args, **kwargs)
         self.fields["coding"].widget.model_instance = self.instance
+        self.fields["coding"].required = False
 
 
 class ItemCodingInline(admin.StackedInline):
