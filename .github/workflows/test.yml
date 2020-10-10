@@ -39,8 +39,6 @@ jobs:
         run: |
           sudo pip install pipenv
           PIPENV_VENV_IN_PROJECT=1 pipenv sync --dev
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
       - name: Linting and static analysis
         uses: pre-commit/action@v2.0.0
       - name: Initialize DB
