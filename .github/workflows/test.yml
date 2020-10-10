@@ -37,7 +37,7 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('Pipfile.lock') }}
       - name: Install dependencies
         run: |
-          sudo pip install pipenv
+          sudo python3.8 -m pip install pipenv
           PIPENV_VENV_IN_PROJECT=1 pipenv sync --dev
       - name: Linting and static analysis
         uses: pre-commit/action@v2.0.0
@@ -45,9 +45,9 @@ jobs:
         env:
           DATABASE_URL: "postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres"
         run: |
-          pipenv run python manage.py migrate
+          pipenv run python3.8 manage.py migrate
       - name: Run tests
         env:
           DATABASE_URL: "postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres"
         run: |
-          pipenv run python manage.py test
+          pipenv run python3.8 manage.py test
