@@ -37,17 +37,19 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('Pipfile.lock') }}
       - name: Install dependencies
         run: |
-          sudo python3.8 -m pip install pipenv
+          sudo pip install pipenv
           PIPENV_VENV_IN_PROJECT=1 pipenv sync --dev
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
       - name: Linting and static analysis
         uses: pre-commit/action@v2.0.0
       - name: Initialize DB
         env:
           DATABASE_URL: "postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres"
         run: |
-          pipenv run python3.8 manage.py migrate
+          pipenv run python manage.py migrate
       - name: Run tests
         env:
           DATABASE_URL: "postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres"
         run: |
-          pipenv run python3.8 manage.py test
+          pipenv run python manage.py test
