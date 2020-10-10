@@ -31,7 +31,7 @@ jobs:
       - name: Get Python Version
         id: get-python-version
         run: |
-          echo "::set-output name=python-version::$(python -c "import sys; print(sys.version)")"
+          echo "::set-output name=python-version::$(python -c "import sys; print(sys.hexversion)")"
         shell: bash
       - name: Cache
         uses: actions/cache@v2.1.1
