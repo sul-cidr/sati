@@ -49,8 +49,14 @@ class ItemAdmin(admin.ModelAdmin):
         models.TextField: {"widget": AdminPagedownWidget},
     }
 
-    list_display = ("item_id", "name", "content_area", "format", "requires_attention")
-    list_filter = ("requires_attention", "content_area", ItemFormatFilter)
+    list_display = (
+        "item_id",
+        "name",
+        "content_area",
+        "format",
+        "requires_attention",
+    )
+    list_filter = ("requires_attention", "language", "content_area", ItemFormatFilter)
     search_fields = ("item_id", "name")
 
     inlines = [ItemCodingInline]
@@ -62,6 +68,7 @@ class ItemAdmin(admin.ModelAdmin):
                 "fields": (
                     "item_id",
                     "name",
+                    "language",
                     "content_area",
                     "format",
                     "requires_attention",
