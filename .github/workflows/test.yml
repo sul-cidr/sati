@@ -28,13 +28,18 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.8
+      - name: Get Python Version
+        id: get-python-version
+        run: |
+          echo "::set-output name=python-version::$(python -c "import sys; print(sys.version)")"
+        shell: bash
       - name: Cache
         uses: actions/cache@v2.1.1
         with:
           path: |
             ~/.cache/pip
             .venv
-          key: ${{ runner.os }}-${{ hashFiles('Pipfile.lock') }}
+          key: ${{ runner.os }}-${{ steps.get-python-version.outputs.python-version }}-${{ hashFiles('Pipfile.lock') }}
       - name: Install dependencies
         run: |
           sudo pip install pipenv
