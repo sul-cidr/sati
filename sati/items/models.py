@@ -35,6 +35,11 @@ class ItemFormat(models.TextChoices):
     FI = "FI", "FI"
 
 
+class ItemLanguage(models.TextChoices):
+    EN = "EN", "English"
+    ZH = "ZH", "Chinese"
+
+
 class ContentArea(models.TextChoices):
     EARTH_SCIENCE = "ES", "Earth Science"
     LIFE_SCIENCE = "LS", "Life Science"
@@ -53,6 +58,9 @@ class Item(models.Model):
     item_id = models.CharField(max_length=30, unique=True, verbose_name="Item ID")
     slug = models.SlugField(max_length=30, unique=True)
     name = models.CharField(max_length=30)
+    language = models.CharField(
+        max_length=2, choices=ItemLanguage.choices, verbose_name="Item Primary Language"
+    )
     format = ChoiceArrayField(models.CharField(max_length=2, choices=ItemFormat.choices))
     content_area = models.CharField(
         max_length=2, choices=ContentArea.choices, verbose_name="Content Area"
