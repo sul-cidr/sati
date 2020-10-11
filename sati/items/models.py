@@ -68,6 +68,7 @@ class Item(models.Model):
     main_image = models.ImageField(upload_to=UploadTo("main_image"), max_length=255)
     requires_attention = models.BooleanField(verbose_name="Requires Attention?")
     notes = models.TextField(blank=True, null=False, default="")
+    ocr_text = models.TextField(blank=True, null=False, default="")
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.item_id)
