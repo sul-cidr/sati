@@ -57,7 +57,7 @@ class ItemAdmin(admin.ModelAdmin):
         "requires_attention",
     )
     list_filter = ("requires_attention", "language", "content_area", ItemFormatFilter)
-    search_fields = ("item_id", "name")
+    search_fields = ("item_id", "name", "ocr_text")
 
     inlines = [ItemCodingInline]
 
