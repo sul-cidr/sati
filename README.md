@@ -7,7 +7,7 @@
 ## Development
 With a working version of Python 3.8 and Pipenv:
 
-1. Install dependencies (use `sync` instead of `install` to use `Pipfile.lock` instead, and ensure a deterministic enviroment).
+1. Install dependencies (use `sync` instead of `install` to use `Pipfile.lock` instead, and ensure a deterministic environment).
 	```
 	$ pipenv sync --dev
 	```
