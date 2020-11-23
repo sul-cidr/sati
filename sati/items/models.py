@@ -30,9 +30,9 @@ class UploadTo:
 class ItemFormat(models.TextChoices):
     MC = "MC", "Multiple Choice"
     CR = "CR", "Constructed Response"
-    FB = "FB", "FB"
-    FT = "FT", "FT"
-    FI = "FI", "FI"
+    FB = "FB", "Fill in the Blank"
+    FT = "FT", "Fill in the Table/Chart/Graph"
+    FI = "FI", "Fill in the Illustration"
 
 
 class ItemLanguage(models.TextChoices):
