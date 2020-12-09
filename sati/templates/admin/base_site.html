@@ -42,6 +42,9 @@
                     document.querySelectorAll('.dynamic-itemcoding_set > h3').forEach(
                         el => el.addEventListener('click', e => el.parentElement.toggleAttribute('collapsed'))
                     );
+                    document.querySelectorAll('.dynamic-itemcoding_set > h3 span.delete').forEach(
+                        el => el.addEventListener('click', e => e.stopPropagation())
+                    );
                 });
 
                 Baton.init({
