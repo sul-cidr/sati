@@ -95,11 +95,11 @@ div[id|="itemcoding_set"] .field-coding > div > label {
 }
 
 /* Collapsible inline codings */
-div[id|="itemcoding_set"] > h3 {
+div[id|="itemcoding_set"]:not(#itemcoding_set-group) > h3 {
   cursor: pointer;
 }
 
-div[id|="itemcoding_set"] > h3:before {
+div[id|="itemcoding_set"]:not(#itemcoding_set-group) > h3:before {
   content: "➤";
   display: block;
   margin-right: 8px;
@@ -107,14 +107,16 @@ div[id|="itemcoding_set"] > h3:before {
   transition: transform 0.5s ease;
 }
 
-div[id|="itemcoding_set"] > h3:hover:before {
+div[id|="itemcoding_set"]:not(#itemcoding_set-group) > h3:hover:before {
   color: #902200;
 }
 
-div[id|="itemcoding_set"][collapsed] > h3:before {
+div[id|="itemcoding_set"]:not(#itemcoding_set-group):not([expanded])
+  > h3:before {
   transform: rotate(0deg);
 }
 
-div[id|="itemcoding_set"][collapsed] > fieldset {
+div[id|="itemcoding_set"]:not(#itemcoding_set-group):not([expanded])
+  > fieldset {
   display: none !important;
 }

@@ -40,7 +40,7 @@
 
                 Baton.Dispatcher.register('onReady', () => {
                     document.querySelectorAll('.dynamic-itemcoding_set > h3').forEach(
-                        el => el.addEventListener('click', e => el.parentElement.toggleAttribute('collapsed'))
+                        el => el.addEventListener('click', e => el.parentElement.toggleAttribute('expanded'))
                     );
                     document.querySelectorAll('.dynamic-itemcoding_set > h3 span.delete').forEach(
                         el => el.addEventListener('click', e => e.stopPropagation())
