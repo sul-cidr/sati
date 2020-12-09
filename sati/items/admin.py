@@ -45,6 +45,8 @@ class ItemFormatFilter(admin.SimpleListFilter):
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
+    save_on_top = True
+
     formfield_overrides = {
         models.TextField: {"widget": AdminPagedownWidget},
     }
