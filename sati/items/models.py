@@ -88,4 +88,4 @@ class ItemCoding(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Coding for {self.item}"
+        return f"Coding from {self.coding_source}"
