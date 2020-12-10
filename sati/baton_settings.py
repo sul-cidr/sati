@@ -4,7 +4,7 @@ BATON = {
     "INDEX_TITLE": "Database Administration",
     "CONFIRM_UNSAVED_CHANGES": True,
     "SHOW_MULTIPART_UPLOADING": True,
-    "ENABLE_IMAGES_PREVIEW": True,
+    "ENABLE_IMAGES_PREVIEW": False,  # disabling, so as to reimplement
     "GRAVATAR_DEFAULT_IMG": "identicon",
     "CHANGELIST_FILTERS_IN_MODAL": False,
     "MENU_ALWAYS_COLLAPSED": False,
