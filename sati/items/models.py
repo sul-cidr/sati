@@ -103,10 +103,10 @@ class Item(Submission):
 
 
 class ItemCoding(Submission):
-    coding_source = models.CharField(max_length=30)
     coding_scheme = models.CharField(max_length=2, choices=CodingScheme.choices)
     coding = CodingField()
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Coding from {self.coding_source}"
+        return f"""Coding by {self.submitted_by}{'' if not self.submitted_by.is_active
+                  else ', ' + self.submitted_at.strftime('%Y-%m-%d')}"""
