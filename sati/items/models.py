@@ -1,10 +1,12 @@
 import os
 import re
 from pathlib import Path
+from uuid import uuid4
 
 from django.db import models
 from django.utils.text import slugify
 
+from ..users.models import User
 from .fields import ChoiceArrayField, CodingField
 
 
@@ -50,6 +52,25 @@ class CodingScheme(models.TextChoices):
     WANG_2012 = "WC", "Wang, C. (2012)"
 
 
+class Submission(models.Model):
+    """Abstract class for objects that may be independently submitted."""
+
+    uuid = models.UUIDField(primary_key=True, default=uuid4, editable=False, unique=True)
+
+    submitted_at = models.DateTimeField(auto_now_add=True, editable=False)
+    modified_at = models.DateTimeField(auto_now=True, editable=False)
+
+    submitted_by = models.ForeignKey(
+        User,
+        related_name="%(class)ss",
+        related_query_name="%(class)s",
+        on_delete=models.CASCADE,
+    )
+
+    class Meta:
+        abstract = True
+
+
 class ItemOrigin(models.Model):
     origin = models.JSONField()
 
@@ -78,7 +99,6 @@ class Item(models.Model):
         return f"{self.item_id} - {self.name.title()}"
 
     class Meta:
-        ordering = ["id"]
 
 
 class ItemCoding(models.Model):
