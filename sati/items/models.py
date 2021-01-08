@@ -99,6 +99,7 @@ class Item(Submission):
         return f"{self.item_id} - {self.name.title()}"
 
     class Meta:
+        ordering = ["item_id"]
 
 
 class ItemCoding(Submission):
