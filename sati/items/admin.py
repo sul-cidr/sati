@@ -2,7 +2,7 @@ from django import forms
 from django.contrib import admin
 from django.db import models
 
-from sati.items.models import Item, ItemCoding, ItemFormat
+from sati.items.models import Item, ItemCoding, ItemFormat, CodingScheme
 from sati.items.fields import CodingField
 from sati.widgets import AdminPagedownWidget
 
@@ -15,9 +15,13 @@ class ItemCodingForm(forms.ModelForm):
         fields = "__all__"
 
     def __init__(self, *args, **kwargs):
-        """The model instance is passed here in order to have access to the coding
-        scheme in the CodingWidget."""
+        # set some default initial values
+        initial = {"coding_scheme": CodingScheme.WANG_2012}
+        kwargs["initial"] = initial
         super(ItemCodingForm, self).__init__(*args, **kwargs)
+
+        # Pass the model instance in order to have access to the
+        #  coding scheme in the CodingWidget.
         self.fields["coding"].widget.model_instance = self.instance
         self.fields["coding"].required = False
 
