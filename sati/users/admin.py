@@ -71,7 +71,7 @@ class UserAdmin(UserAdmin):
         ),
     )
     search_fields = ("email",)
-    ordering = ("id",)
+    ordering = ("email",)
 
     def gravatar(self, obj):
         return mark_safe(f"<img src='{gravatar_url(obj.email)}' width='50' height='50'>")
