@@ -75,7 +75,7 @@ class ItemOrigin(models.Model):
     origin = models.JSONField()
 
 
-class Item(models.Model):
+class Item(Submission):
     item_id = models.CharField(max_length=30, unique=True, verbose_name="Item ID")
     slug = models.SlugField(max_length=30, unique=True)
     name = models.CharField(max_length=30)
@@ -101,7 +101,7 @@ class Item(models.Model):
     class Meta:
 
 
-class ItemCoding(models.Model):
+class ItemCoding(Submission):
     coding_source = models.CharField(max_length=30)
     coding_scheme = models.CharField(max_length=2, choices=CodingScheme.choices)
     coding = CodingField()
