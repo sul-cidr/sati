@@ -23,6 +23,14 @@ class ItemCodingForm(forms.ModelForm):
 
 
 class ItemCodingInline(admin.StackedInline):
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "submitted_by":
+            kwargs["initial"] = request.user
+            return db_field.formfield(**kwargs)
+        return super(ItemCodingInline, self).formfield_for_foreignkey(
+            db_field, request, **kwargs
+        )
+
     form = ItemCodingForm
     model = ItemCoding
     extra = 0
