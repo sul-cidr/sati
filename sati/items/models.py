@@ -48,6 +48,22 @@ class ContentArea(models.TextChoices):
     PHYSICAL_SCIENCE = "PS", "Physical Science"
 
 
+class GradeLevel(models.IntegerChoices):
+    K = 0, "Kindergarten"
+    ONE = 1, "First Grade"
+    TWO = 2, "Second Grade"
+    THREE = 3, "Third Grade"
+    FOUR = 4, "Fourth Grade"
+    FIVE = 5, "Fifth Grade"
+    SIX = 6, "Sixth Grade"
+    SEVEN = 7, "Seventh Grade"
+    EIGHT = 8, "Eighth Grade"
+    NINE = 9, "Ninth Grade"
+    TEN = 10, "Tenth Grade"
+    ELEVEN = 11, "Eleventh Grade"
+    TWELVE = 12, "Twelfth Grade"
+
+
 class CodingScheme(models.TextChoices):
     WANG_2012 = "WC", "Wang, C. (2012)"
 
@@ -76,6 +92,9 @@ class ItemOrigin(models.Model):
     year = models.PositiveSmallIntegerField()
     source_url = models.URLField(
         blank=True, null=False, default="", verbose_name="Source URL"
+    )
+    grade_level = models.PositiveSmallIntegerField(
+        choices=GradeLevel.choices, verbose_name="Grade Level", null=True
     )
 
 
