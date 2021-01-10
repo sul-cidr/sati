@@ -72,7 +72,11 @@ class Submission(models.Model):
 
 
 class ItemOrigin(models.Model):
-    origin = models.JSONField()
+    name = models.CharField(max_length=30, unique=True)
+    year = models.PositiveSmallIntegerField()
+    source_url = models.URLField(
+        blank=True, null=False, default="", verbose_name="Source URL"
+    )
 
 
 class Item(Submission):
