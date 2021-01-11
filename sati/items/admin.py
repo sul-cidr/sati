@@ -91,3 +91,8 @@ class ItemAdmin(admin.ModelAdmin):
     )
 
     list_per_page = 50
+
+    def save_model(self, request, obj, form, change):
+        if not change:
+            obj.submitted_by = request.user
+        super().save_model(request, obj, form, change)
