@@ -30,7 +30,7 @@ class CodingWidget(forms.MultiWidget):
     def _get_dimensions(model_instance):
         scheme = model_instance.get_coding_scheme_display()
         if not scheme:
-            return {}
+            scheme = "Wang, C. (2012)"
         dimensions_path = (
             Path(settings.BASE_DIR)
             / f"sati/items/schemas/{slugify(scheme)}_dimensions.json"
