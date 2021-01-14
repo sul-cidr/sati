@@ -14,7 +14,7 @@ const batonMenuReady = () => {
   }
 };
 
-const batonOnReady = () => {
+const batonOnTabsReady = () => {
   initCodingCollapseToggle();
   initImagePopOut();
 };
