@@ -97,6 +97,9 @@ class ItemOrigin(models.Model):
         choices=GradeLevel.choices, verbose_name="Grade Level", null=True
     )
 
+    def __str__(self):
+        return f"{self.name} ({self.year})"
+
 
 class Item(Submission):
     item_id = models.CharField(max_length=30, unique=True, verbose_name="Item ID")
