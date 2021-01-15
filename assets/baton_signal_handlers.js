@@ -17,16 +17,26 @@ const batonMenuReady = () => {
 const batonOnTabsReady = () => {
   initCodingCollapseToggle();
   initImagePopOut();
+  const observer = new MutationObserver((mutationsList, observer) => {
+    mutationsList.forEach((mutation) => {
+      initCodingCollapseToggle(mutation.target);
+    });
+  });
+
+  observer.observe(document.querySelector("#inline-itemcoding"), {
+    childList: true,
+    subtree: true,
+  });
 };
 
-const initCodingCollapseToggle = () => {
-  document
+const initCodingCollapseToggle = (root = document) => {
+  root
     .querySelectorAll(".dynamic-itemcoding_set > h3")
     .forEach((el) =>
       el.addEventListener("click", (/* event */) =>
         el.parentElement.toggleAttribute("expanded")),
     );
-  document
+  root
     .querySelectorAll(".dynamic-itemcoding_set > h3 span.delete")
     .forEach((el) => el.addEventListener("click", (e) => e.stopPropagation()));
 };
