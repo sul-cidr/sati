@@ -87,7 +87,7 @@ class Submission(models.Model):
         abstract = True
 
 
-class ItemOrigin(models.Model):
+class Test(models.Model):
     name = models.CharField(max_length=30, unique=True)
     year = models.PositiveSmallIntegerField()
     source_url = models.URLField(
@@ -105,7 +105,7 @@ class Item(Submission):
     item_id = models.CharField(max_length=30, unique=True, verbose_name="Item ID")
     slug = models.SlugField(max_length=30, unique=True)
     name = models.CharField(max_length=30)
-    origin = models.ForeignKey(ItemOrigin, null=True, on_delete=models.CASCADE)
+    test = models.ForeignKey(Test, null=True, on_delete=models.CASCADE)
     language = models.CharField(
         max_length=2, choices=ItemLanguage.choices, verbose_name="Item Primary Language"
     )

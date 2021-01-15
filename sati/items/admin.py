@@ -2,7 +2,7 @@ from django import forms
 from django.contrib import admin
 from django.db import models
 
-from sati.items.models import Item, ItemCoding, ItemFormat, ItemOrigin
+from sati.items.models import Item, ItemCoding, ItemFormat, Test
 from sati.items.fields import CodingField
 from sati.widgets import AdminPagedownWidget
 
@@ -79,7 +79,7 @@ class ItemAdmin(admin.ModelAdmin):
                 "fields": (
                     "item_id",
                     "name",
-                    "origin",
+                    "test",
                     "language",
                     "content_area",
                     "format",
@@ -100,8 +100,8 @@ class ItemAdmin(admin.ModelAdmin):
         super().save_model(request, obj, form, change)
 
 
-@admin.register(ItemOrigin)
-class ItemOriginAdmin(admin.ModelAdmin):
+@admin.register(Test)
+class TestAdmin(admin.ModelAdmin):
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
         form.base_fields["source_url"].widget.attrs["style"] = "width: 20em;"
