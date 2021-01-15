@@ -106,3 +106,9 @@ class ItemOriginAdmin(admin.ModelAdmin):
         form = super().get_form(request, obj, **kwargs)
         form.base_fields["source_url"].widget.attrs["style"] = "width: 20em;"
         return form
+
+    list_display = (
+        "name",
+        "year",
+        "grade_level",
+    )
