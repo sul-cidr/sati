@@ -102,6 +102,7 @@ class Item(Submission):
     item_id = models.CharField(max_length=30, unique=True, verbose_name="Item ID")
     slug = models.SlugField(max_length=30, unique=True)
     name = models.CharField(max_length=30)
+    origin = models.ForeignKey(ItemOrigin, null=True, on_delete=models.CASCADE)
     language = models.CharField(
         max_length=2, choices=ItemLanguage.choices, verbose_name="Item Primary Language"
     )
