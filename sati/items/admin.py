@@ -79,6 +79,7 @@ class ItemAdmin(admin.ModelAdmin):
                 "fields": (
                     "item_id",
                     "name",
+                    "origin",
                     "language",
                     "content_area",
                     "format",
