@@ -33,8 +33,11 @@ class JSONSchemaField(JSONField):
     @property
     def _schema_data(self):
         schema_path = Path(settings.BASE_DIR) / self.schema
-        with schema_path.open("r") as _fh:
-            return json.loads(_fh.read())
+        try:
+            with schema_path.open("r") as _fh:
+                return json.loads(_fh.read())
+        except FileNotFoundError:
+            raise ValidationError("No schema available!", code="no-schema")
 
     def _validate_schema(self, value):
         # Disable validation when migrations are faked
