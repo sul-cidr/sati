@@ -2,7 +2,7 @@ from django import forms
 from django.contrib import admin
 from django.db import models
 
-from sati.items.models import Item, ItemCoding, ItemFormat
+from sati.items.models import Item, ItemCoding, ItemFormat, ItemOrigin
 from sati.items.fields import CodingField
 from sati.widgets import AdminPagedownWidget
 
@@ -98,3 +98,6 @@ class ItemAdmin(admin.ModelAdmin):
         if not change:
             obj.submitted_by = request.user
         super().save_model(request, obj, form, change)
+
+
+admin.site.register(ItemOrigin)
