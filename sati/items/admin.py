@@ -107,6 +107,10 @@ class TestAdmin(admin.ModelAdmin):
         form.base_fields["source_url"].widget.attrs["style"] = "width: 20em;"
         return form
 
+    formfield_overrides = {
+        models.TextField: {"widget": AdminPagedownWidget},
+    }
+
     list_display = (
         "name",
         "year",
