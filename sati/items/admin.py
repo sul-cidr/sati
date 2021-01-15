@@ -100,4 +100,9 @@ class ItemAdmin(admin.ModelAdmin):
         super().save_model(request, obj, form, change)
 
 
-admin.site.register(ItemOrigin)
+@admin.register(ItemOrigin)
+class ItemOriginAdmin(admin.ModelAdmin):
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj, **kwargs)
+        form.base_fields["source_url"].widget.attrs["style"] = "width: 20em;"
+        return form
