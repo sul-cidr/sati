@@ -103,7 +103,12 @@ class Item(Submission):
 
 
 class ItemCoding(Submission):
-    coding_scheme = models.CharField(max_length=2, choices=CodingScheme.choices)
+    coding_scheme = models.CharField(
+        max_length=2,
+        choices=CodingScheme.choices,
+        blank=False,
+        default=CodingScheme.WANG_2012,
+    )
     coding = CodingField()
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
 
