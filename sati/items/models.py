@@ -96,6 +96,7 @@ class Test(models.Model):
     grade_level = models.PositiveSmallIntegerField(
         choices=GradeLevel.choices, verbose_name="Grade Level", null=True
     )
+    notes = models.TextField(blank=True, null=False, default="")
 
     def __str__(self):
         return f"{self.name} ({self.year})"
