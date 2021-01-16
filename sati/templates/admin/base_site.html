@@ -24,7 +24,7 @@
         (function ($, undefined) {
             $(window).on('load', () => {
                 Baton.Dispatcher.register('onMenuReady', batonMenuReady);
-                Baton.Dispatcher.register('onReady', batonOnReady);
+                Baton.Dispatcher.register('onTabsReady', batonOnTabsReady);
 
                 Baton.init({
                     api: {
