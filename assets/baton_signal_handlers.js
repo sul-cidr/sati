@@ -17,6 +17,9 @@ const batonMenuReady = () => {
 const batonOnTabsReady = () => {
   initCodingCollapseToggle();
   initImagePopOut();
+
+  initCodingsValidation();
+
   const observer = new MutationObserver((mutationsList, observer) => {
     mutationsList.forEach((mutation) => {
       initCodingCollapseToggle(mutation.target);
@@ -71,5 +74,55 @@ const initImagePopOut = () => {
         image.src = url;
       }
     }
+  });
+};
+
+const initCodingsValidation = () => {
+  /* show a confirmation dialogue if a new coding form is submitted with
+     no dimensions checked (the assumption being this is almost
+     certainly a mistake). */
+  let confirmEmptySubmit = false;
+  const itemForm = document.getElementById("item_form");
+
+  itemForm.addEventListener("submit", (event) => {
+    Array.from(
+      document.querySelectorAll("#itemcoding_set-group .coding-widget"),
+    ).forEach((widget) => {
+      const dimensionsChecked = Array.from(
+        widget.querySelectorAll("input[type='checkbox']"),
+      ).filter((cb) => cb.checked).length;
+
+      const isEmptyForm = widget
+        .closest(".inline-related")
+        .classList.contains("empty-form");
+
+      const hasOriginal = widget
+        .closest(".inline-related")
+        .classList.contains("has_original");
+
+      if (
+        !isEmptyForm &&
+        !hasOriginal &&
+        !dimensionsChecked &&
+        !confirmEmptySubmit
+      ) {
+        const confirmationDialog = new Baton.Modal({
+          title: "Are you sure?",
+          content:
+            "<p>No dimensions have been checked -- do you want to save a form with all dimensions coded to false?</p>",
+          size: "lg",
+          actionBtnLabel: "Confirm",
+          actionBtnCb: () => {
+            confirmEmptySubmit = true;
+            itemForm
+              .querySelector(`input[name='${event.submitter.name}']`)
+              .click();
+          },
+        });
+
+        confirmationDialog.open();
+        event.preventDefault();
+      }
+    });
   });
 };
