@@ -37,6 +37,16 @@
                         link.parentElement.classList.add('active');
                     }
                 });
+
+                Baton.Dispatcher.register('onReady', () => {
+                    document.querySelectorAll('.dynamic-itemcoding_set > h3').forEach(
+                        el => el.addEventListener('click', e => el.parentElement.toggleAttribute('expanded'))
+                    );
+                    document.querySelectorAll('.dynamic-itemcoding_set > h3 span.delete').forEach(
+                        el => el.addEventListener('click', e => e.stopPropagation())
+                    );
+                });
+
                 Baton.init({
                     api: {
                         app_list: '{% url 'baton-app-list-json' %}',

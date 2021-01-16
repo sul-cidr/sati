@@ -93,3 +93,28 @@ label[for="id_main_image"] {
 div[id|="itemcoding_set"] .field-coding > div > label {
   display: none;
 }
+
+/* Collapsible inline codings */
+div[id|="itemcoding_set"].has_original > h3 {
+  cursor: pointer;
+}
+
+div[id|="itemcoding_set"].has_original > h3:before {
+  content: "➤";
+  display: block;
+  margin-right: 8px;
+  transform: rotate(90deg);
+  transition: transform 0.5s ease;
+}
+
+div[id|="itemcoding_set"].has_original > h3:hover:before {
+  color: #902200;
+}
+
+div[id|="itemcoding_set"].has_original:not([expanded]) > h3:before {
+  transform: rotate(0deg);
+}
+
+div[id|="itemcoding_set"].has_original:not([expanded]) > fieldset {
+  display: none !important;
+}
