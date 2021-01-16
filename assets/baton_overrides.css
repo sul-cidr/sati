@@ -118,3 +118,8 @@ div[id|="itemcoding_set"].has_original:not([expanded]) > h3:before {
 div[id|="itemcoding_set"].has_original:not([expanded]) > fieldset {
   display: none !important;
 }
+
+/* Pop-out Images */
+.field-main_image img.baton-image-preview {
+  cursor: pointer;
+}
