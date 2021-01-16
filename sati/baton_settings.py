@@ -26,8 +26,8 @@ BATON = {
         },
         {
             "type": "model",
-            "label": "Coding",
-            "name": "itemcoding",
+            "label": "Tests",
+            "name": "test",
             "icon": "fa fa-fw fa-list-ol",
             "app": "items",
         },
