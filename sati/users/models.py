@@ -1,3 +1,5 @@
+from uuid import uuid4
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models import signals
@@ -7,6 +9,7 @@ from .managers import UserManager
 
 
 class User(AbstractUser):
+    uuid = models.UUIDField(primary_key=True, default=uuid4, editable=False, unique=True)
     username = None
     email = models.EmailField(
         _("email address"),

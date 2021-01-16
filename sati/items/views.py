@@ -8,4 +8,4 @@ from .models import Item
 class AdminRedirect(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         item = get_object_or_404(Item, item_id=kwargs["id"])
-        return reverse("admin:items_item_change", kwargs={"object_id": item.id})
+        return reverse("admin:items_item_change", kwargs={"object_id": item.uuid})

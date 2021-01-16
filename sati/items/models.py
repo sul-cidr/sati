@@ -1,10 +1,12 @@
 import os
 import re
 from pathlib import Path
+from uuid import uuid4
 
 from django.db import models
 from django.utils.text import slugify
 
+from ..users.models import User
 from .fields import ChoiceArrayField, CodingField
 
 
@@ -50,11 +52,30 @@ class CodingScheme(models.TextChoices):
     WANG_2012 = "WC", "Wang, C. (2012)"
 
 
+class Submission(models.Model):
+    """Abstract class for objects that may be independently submitted."""
+
+    uuid = models.UUIDField(primary_key=True, default=uuid4, editable=False, unique=True)
+
+    submitted_at = models.DateTimeField(auto_now_add=True, editable=False)
+    modified_at = models.DateTimeField(auto_now=True, editable=False)
+
+    submitted_by = models.ForeignKey(
+        User,
+        related_name="%(class)ss",
+        related_query_name="%(class)s",
+        on_delete=models.CASCADE,
+    )
+
+    class Meta:
+        abstract = True
+
+
 class ItemOrigin(models.Model):
     origin = models.JSONField()
 
 
-class Item(models.Model):
+class Item(Submission):
     item_id = models.CharField(max_length=30, unique=True, verbose_name="Item ID")
     slug = models.SlugField(max_length=30, unique=True)
     name = models.CharField(max_length=30)
@@ -78,14 +99,14 @@ class Item(models.Model):
         return f"{self.item_id} - {self.name.title()}"
 
     class Meta:
-        ordering = ["id"]
+        ordering = ["item_id"]
 
 
-class ItemCoding(models.Model):
-    coding_source = models.CharField(max_length=30)
+class ItemCoding(Submission):
     coding_scheme = models.CharField(max_length=2, choices=CodingScheme.choices)
     coding = CodingField()
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Coding from {self.coding_source}"
+        return f"""Coding by {self.submitted_by}{'' if not self.submitted_by.is_active
+                  else ', ' + self.submitted_at.strftime('%Y-%m-%d')}"""
