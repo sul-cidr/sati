@@ -1,0 +1,33 @@
+version: "3"
+services:
+  postgres:
+    container_name: sati-db
+    image: sati-db
+    build:
+      context: .
+      dockerfile: containers/sati-db/Dockerfile
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "10"
+        compress: "true"
+    env_file:
+      - .env
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD not set!}
+
+  django:
+    container_name: sati-app
+    image: sati-app
+    build:
+      context: .
+      dockerfile: containers/sati-app/Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
+    env_file:
+      - .env
+    ports:
+      - "8888:8000"
+    depends_on:
+      - postgres
