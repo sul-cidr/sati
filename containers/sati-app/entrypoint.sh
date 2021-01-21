@@ -6,7 +6,7 @@ cmd="$*";
 
 cd /opt/sati;
 python manage.py migrate;
-python manage.py collectstatic --clear --no-input -v0;
+python manage.py collectstatic --no-input -v0;
 
 
 exec $cmd
