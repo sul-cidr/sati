@@ -3,6 +3,7 @@
 import os
 
 import dj_database_url
+from django.core.exceptions import ImproperlyConfigured
 from dotenv import load_dotenv
 
 from .baton_settings import BATON  # noqa: F401
@@ -11,11 +12,17 @@ load_dotenv()
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+DEBUG = os.environ.get("DEBUG", "true").lower() == "true"
+
+if not DEBUG and "SECRET_KEY" not in os.environ:
+    # a new SECRET_KEY can be generated with
+    #  python -c "import secrets; print(secrets.token_urlsafe())"
+    raise ImproperlyConfigured("Don't use the default SECRET_KEY in production!")
+
 SECRET_KEY = os.environ.get(
     "SECRET_KEY", "jl%^r)&^hl6ttj$%(q4tx1ym7z5)eq^zg&7cmx6(yns%l77g%b"
 )
 
-DEBUG = os.environ.get("DEBUG", "true").lower() == "true"
 
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1,0.0.0.0").split(",")
 INTERNAL_IPS = ("127.0.0.1",)
