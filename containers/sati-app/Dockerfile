@@ -12,7 +12,7 @@ COPY containers/sati-app/entrypoint.sh /docker-entrypoint.sh
 
 RUN apk --no-cache add --virtual build-deps gcc python3-dev musl-dev libjpeg \
   && apk --no-cache add tini postgresql-dev jpeg-dev zlib-dev \
-  && pip install pipenv \
+  && pip install pipenv gunicorn \
   && pipenv install --deploy --system --ignore-pipfile \
   && apk del build-deps \
   && chmod 755 "/docker-entrypoint.sh"

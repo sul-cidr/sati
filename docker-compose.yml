@@ -26,7 +26,15 @@ services:
     build:
       context: .
       dockerfile: containers/sati-app/Dockerfile
-    command: python manage.py runserver 0.0.0.0:8000
+    command: >
+      /usr/local/bin/gunicorn sati.wsgi:application \
+        --workers=4  \
+        --max-requests=1000 \
+        --max-requests-jitter=500 \
+        --bind='0.0.0.0:8000'  \
+        --chdir='/opt/sati/' \
+        --log-file=- \
+        --worker-tmp-dir='/dev/shm'
     env_file:
       - .env
     volumes:
