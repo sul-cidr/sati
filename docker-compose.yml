@@ -31,6 +31,6 @@ services:
       - ./static:/opt/sati/static
       - ./media:/opt/sati/media
     ports:
-      - "8888:8000"
+      - "8000:8000"
     depends_on:
       - postgres
