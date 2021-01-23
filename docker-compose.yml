@@ -17,6 +17,8 @@ services:
       - .env
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD not set!}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
 
   django:
     container_name: sati-app
@@ -34,3 +36,6 @@ services:
       - "8000:8000"
     depends_on:
       - postgres
+
+volumes:
+  pgdata:
