@@ -2,7 +2,7 @@
 
 set -eou pipefail;
 
-cmd="$*";
+COMMAND="$*";
 
 while ! nc -z "${DB_HOST}" "${DB_PORT}";
 do
@@ -14,4 +14,5 @@ cd /opt/sati;
 python manage.py migrate;
 python manage.py collectstatic --no-input -v0;
 
-exec $cmd;
+# shellcheck disable=SC2086
+exec $COMMAND;
