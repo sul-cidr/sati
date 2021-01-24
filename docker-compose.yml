@@ -14,7 +14,7 @@ services:
         max-file: "10"
         compress: "true"
     env_file:
-      - .env
+      - ${ENV_FILE:-.env}
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD not set!}
     volumes:
@@ -36,7 +36,7 @@ services:
         --log-file=- \
         --worker-tmp-dir='/dev/shm'
     env_file:
-      - .env
+      - ${ENV_FILE:-.env}
     volumes:
       - ./static:/opt/sati/static
       - ./media:/opt/sati/media
