@@ -35,6 +35,12 @@ services:
         --chdir='/opt/sati/' \
         --log-file=- \
         --worker-tmp-dir='/dev/shm'
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "10"
+        compress: "true"
     env_file:
       - ${ENV_FILE:-.env}
     volumes:
