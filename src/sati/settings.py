@@ -130,3 +130,8 @@ ADMINS = (
     if os.getenv("ADMINS", None)
     else []
 )
+
+# The only email this app sends is exception reports to users listed in ADMINS
+#  (if any), so these settings aren't needed for development.
+DEFAULT_FROM_EMAIL = SERVER_EMAIL = os.getenv("SERVER_EMAIL", "root@localhost")
+EMAIL_HOST = os.getenv("EMAIL_HOST", "localhost")
