@@ -19,7 +19,7 @@ With a working version of Python 3.8 and Pipenv:
    $ pipenv run pre-commit install
    ```
 
-3. Create a database (if not created yet) and migrate. Only PostgreSQL is supported. A `DATABASE_URL` can be defined in a `.env` file or set as an environment variable. See [`.env_tempate`](.env_template) and [here](https://github.com/kennethreitz/dj-database-url#url-schema) for details.
+3. Create a database (if not created yet) and migrate. Only PostgreSQL is supported. Database settings must be specified in a `.env` file (see [`.env_tempate`](.env_template) for details).
 
    ```
    $ pipenv run python manage.py migrate
@@ -55,3 +55,15 @@ With a working version of Python 3.8 and Pipenv:
   ```
   $ pipenv run pre-commit run --all-files
   ```
+
+## Production
+
+A production-ready deployment can be brought up with just `docker-compose up --build [-d]`. This will start a container for the django app and another for the PostgreSQL database server. Note that the app is via `gunicorn` on port 8000 which is exposed to the docker host, and the `/static` and `/media` roots are mounted from the host filesystem, as this is intended to be run behind a webserver on the docker host which serves up `/static` and `/media` and reverse-proxies the app.
+
+Running the Django development server is possible with a command like the example below, but note that the docker image is compiled without installing the Django dev. dependencies.
+
+```
+docker-compose run --rm --name sati-app -p 8000:8000 django python manage.py runserver 0.0.0.0:8000
+```
+
+See the notes in [`.env_tempate`](.env_template) for further details.
