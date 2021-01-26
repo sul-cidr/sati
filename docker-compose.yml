@@ -17,6 +17,8 @@ services:
       - ${ENV_FILE:-.env}
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD not set!}
+    networks:
+      - sati
     volumes:
       - pgdata:/var/lib/postgresql/data
 
@@ -46,6 +48,8 @@ services:
     volumes:
       - ./static:/opt/sati/static
       - ./media:/opt/sati/media
+    networks:
+      - sati
     ports:
       - "8000:8000"
     depends_on:
@@ -53,3 +57,11 @@ services:
 
 volumes:
   pgdata:
+
+networks:
+  sati:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/24
