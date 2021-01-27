@@ -38,10 +38,11 @@ jobs:
         with:
           path: |
             ~/.cache/pip
-            .venv
+            src/.venv
           key: ${{ runner.os }}-${{ steps.get-python-version.outputs.python-version }}-${{ hashFiles('Pipfile.lock') }}
       - name: Install dependencies
         run: |
+          cd src
           sudo pip install pipenv
           PIPENV_VENV_IN_PROJECT=1 pipenv sync --dev
       - name: Linting and static analysis
@@ -50,9 +51,11 @@ jobs:
         env:
           DATABASE_URL: "postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres"
         run: |
+          cd src
           pipenv run python manage.py migrate
       - name: Run tests
         env:
           DATABASE_URL: "postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres"
         run: |
+          cd src
           pipenv run python manage.py test
