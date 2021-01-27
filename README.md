@@ -3,47 +3,67 @@
 
 # Semiotic Analysis of Test Items
 
-
 ## Development
+
 With a working version of Python 3.8 and Pipenv:
 
 1. Install dependencies (use `sync` instead of `install` to use `Pipfile.lock` instead, and ensure a deterministic environment).
-	```
-	$ pipenv sync --dev
-	```
+
+   ```
+   $ pipenv sync --dev
+   ```
 
 2. Install pre-commit hooks.
-	```
-	$ pipenv run pre-commit install
-	```
 
-3. Create a database (if not created yet) and migrate.  Only PostgreSQL is supported.  A `DATABASE_URL` can be defined in a `.env` file or set as an environment variable. See [`.env_tempate`](.env_template) and [here](https://github.com/kennethreitz/dj-database-url#url-schema) for details.
-	```
-	$ pipenv run python manage.py migrate
-	```
+   ```
+   $ pipenv run pre-commit install
+   ```
+
+3. Create a database (if not created yet) and migrate. Only PostgreSQL is supported. Database settings must be specified in a `.env` file (see [`.env_tempate`](.env_template) for details).
+
+   ```
+   $ pipenv run python manage.py migrate
+   ```
 
 4. Create a superuser.
-	```
-	$ pipenv run python manage.py createsuperuser
-	```
+
+   ```
+   $ pipenv run python manage.py createsuperuser
+   ```
 
 5. Collect static files from installed apps.
-	```
-	$ pipenv run python manage.py collectstatic
-	```
+
+   ```
+   $ pipenv run python manage.py collectstatic
+   ```
 
 6. Start development server and go to `http://localhost:8000/admin/`.
-	```
-	$ pipenv run python manage.py runserver localhost:8000
-	```
+
+   ```
+   $ pipenv run python manage.py runserver localhost:8000
+   ```
 
 ## Testing
+
 - Tests
-	```
-	$ pipenv run python manage.py test
-	```
+
+  ```
+  $ pipenv run python manage.py test
+  ```
 
 - Linting and formatting
-	```
-	$ pipenv run pre-commit run --all-files
-	```
+  ```
+  $ pipenv run pre-commit run --all-files
+  ```
+
+## Production
+
+A production-ready deployment can be brought up with just `docker-compose up --build [-d]`. This will start a container for the django app and another for the PostgreSQL database server. Note that the app is served by `gunicorn` on port 8000 which is exposed to the docker host, and the `/static` and `/media` roots are mounted from the host filesystem, as this is intended to be run behind a webserver on the docker host which serves up `/static` and `/media` and reverse-proxies the app.
+
+Running the Django development server is possible with a command like the example below, but note that the docker image is compiled without installing the Django dev. dependencies.
+
+```
+docker-compose run --rm --name sati-app -p 8000:8000 django python manage.py runserver 0.0.0.0:8000
+```
+
+See the notes in [`.env_tempate`](.env_template) for further details.

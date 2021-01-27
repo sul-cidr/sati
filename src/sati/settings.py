@@ -3,6 +3,7 @@
 import os
 
 import dj_database_url
+from django.core.exceptions import ImproperlyConfigured
 from dotenv import load_dotenv
 
 from .baton_settings import BATON  # noqa: F401
@@ -11,11 +12,17 @@ load_dotenv()
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+DEBUG = os.environ.get("DEBUG", "true").lower() == "true"
+
+if not DEBUG and "SECRET_KEY" not in os.environ:
+    # a new SECRET_KEY can be generated with
+    #  python -c "import secrets; print(secrets.token_urlsafe())"
+    raise ImproperlyConfigured("Don't use the default SECRET_KEY in production!")
+
 SECRET_KEY = os.environ.get(
     "SECRET_KEY", "jl%^r)&^hl6ttj$%(q4tx1ym7z5)eq^zg&7cmx6(yns%l77g%b"
 )
 
-DEBUG = os.environ.get("DEBUG", "true").lower() == "true"
 
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1,0.0.0.0").split(",")
 INTERNAL_IPS = ("127.0.0.1",)
@@ -79,15 +86,14 @@ WSGI_APPLICATION = "sati.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-if "DATABASE_URL" in os.environ:
-    DATABASES = {"default": dj_database_url.config(conn_max_age=600)}
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-        }
-    }
+if "DATABASE_URL" not in os.environ:
+    os.environ[
+        "DATABASE_URL"
+    ] = "postgres://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}".format(
+        **os.environ
+    )
+
+DATABASES = {"default": dj_database_url.config(conn_max_age=600)}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -109,7 +115,7 @@ USE_I18N = False
 USE_L10N = False
 USE_TZ = True
 
-MEDIA_ROOT = os.getenv("MEDIA_ROOT", os.path.join(BASE_DIR, "../media"))
+MEDIA_ROOT = os.getenv("MEDIA_ROOT", os.path.join(BASE_DIR, "media"))
 MEDIA_URL = os.getenv("MEDIA_URL", "/media/")
 
 # Static files (CSS, JavaScript, Images)
@@ -124,3 +130,8 @@ ADMINS = (
     if os.getenv("ADMINS", None)
     else []
 )
+
+# The only email this app sends is exception reports to users listed in ADMINS
+#  (if any), so these settings aren't needed for development.
+DEFAULT_FROM_EMAIL = SERVER_EMAIL = os.getenv("SERVER_EMAIL", "root@localhost")
+EMAIL_HOST = os.getenv("EMAIL_HOST", "localhost")

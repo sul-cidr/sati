@@ -1,0 +1,67 @@
+version: "3"
+services:
+  postgres:
+    container_name: sati-db
+    image: sati-db
+    build:
+      context: .
+      dockerfile: containers/sati-db/Dockerfile
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "10"
+        compress: "true"
+    env_file:
+      - ${ENV_FILE:-.env}
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD not set!}
+    networks:
+      - sati
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  django:
+    container_name: sati-app
+    image: sati-app
+    build:
+      context: .
+      dockerfile: containers/sati-app/Dockerfile
+    command: >
+      /usr/local/bin/gunicorn sati.wsgi:application \
+        --workers=4  \
+        --max-requests=1000 \
+        --max-requests-jitter=500 \
+        --bind='0.0.0.0:8000'  \
+        --chdir='/opt/sati/' \
+        --log-file=- \
+        --worker-tmp-dir='/dev/shm'
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "10"
+        compress: "true"
+    env_file:
+      - ${ENV_FILE:-.env}
+    volumes:
+      - ./static:/opt/sati/static
+      - ./media:/opt/sati/media
+    networks:
+      - sati
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+
+volumes:
+  pgdata:
+
+networks:
+  sati:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: ${DOCKER_SUBNET:-172.18.0.0/24}
