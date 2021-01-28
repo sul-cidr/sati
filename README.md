@@ -56,7 +56,7 @@ With a working version of Python 3.8 and Pipenv:
   $ pipenv run pre-commit run --all-files
   ```
 
-## Production
+## Docker
 
 A production-ready deployment can be brought up with just `docker-compose up --build [-d]`. This will start a container for the django app and another for the PostgreSQL database server. Note that the app is served by `gunicorn` on port 8000 which is exposed to the docker host, and the `/static` and `/media` roots are mounted from the host filesystem, as this is intended to be run behind a webserver on the docker host which serves up `/static` and `/media` and reverse-proxies the app.
 
