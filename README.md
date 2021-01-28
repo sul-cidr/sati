@@ -66,4 +66,19 @@ Running the Django development server is possible with a command like the exampl
 docker-compose run --rm --name sati-app -p 8000:8000 django python manage.py runserver 0.0.0.0:8000
 ```
 
+To run with `DEBUG=True` (and have the dev. server serve static assets) it is necessary to install the `--dev` dependencies. This can be done (if needed for some reason) by getting a shell:
+
+```
+docker-compose run --rm --name sati-app -p 8000:8000 django ash
+```
+
+and using the following commands:
+
+```
+apk add gcc python3-dev musl-dev;
+pipenv install --deploy --system --ignore-pipfile --dev
+export DEBUG=True
+./manage.py runserver 0.0.0.0:8000
+```
+
 See the notes in [`.env_tempate`](.env_template) for further details.
