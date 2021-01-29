@@ -139,6 +139,9 @@ class ItemCoding(Submission):
     )
     coding = CodingField()
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    notes = models.TextField(
+        blank=True, null=False, default="", verbose_name="Coding Notes"
+    )
 
     def __str__(self):
         return f"""Coding by {self.submitted_by}{'' if not self.submitted_by.is_active
