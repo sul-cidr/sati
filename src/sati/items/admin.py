@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib import admin
 from django.db import models
+from django.utils.safestring import mark_safe
 
 from sati.items.models import Item, ItemCoding, ItemFormat, Test
 from sati.items.fields import CodingField
@@ -54,6 +55,15 @@ class ItemFormatFilter(admin.SimpleListFilter):
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
+    def _requires_attention(self, obj):
+        alert = "<img src='/static/admin/img/icon-alert.svg' alt='Alert'>"
+        if obj.requires_attention:
+            return mark_safe(alert)
+        return ""
+
+    _requires_attention.admin_order_field = "requires_attention"
+    _requires_attention.short_description = "Requires Attention?"
+
     save_on_top = True
 
     formfield_overrides = {
@@ -65,7 +75,7 @@ class ItemAdmin(admin.ModelAdmin):
         "name",
         "content_area",
         "format",
-        "requires_attention",
+        "_requires_attention",
     )
     list_filter = ("requires_attention", "language", "content_area", ItemFormatFilter)
     search_fields = ("item_id", "name", "ocr_text")
