@@ -5,6 +5,7 @@ from django.utils.safestring import mark_safe
 
 from sati.items.models import Item, ItemCoding, ItemFormat, Test
 from sati.items.fields import CodingField
+from sati.users.models import User
 from sati.widgets import AdminPagedownWidget
 
 
@@ -53,6 +54,19 @@ class ItemFormatFilter(admin.SimpleListFilter):
         return queryset
 
 
+class SubmittedByFilter(admin.SimpleListFilter):
+    title = "Uploaded by"
+    parameter_name = "submitted_by"
+
+    def lookups(self, request, model_admin):
+        return User.objects.exclude(item=None).values_list("uuid", "email")
+
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.filter(submitted_by=self.value())
+        return queryset
+
+
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
     def _requires_attention(self, obj):
@@ -78,7 +92,7 @@ class ItemAdmin(admin.ModelAdmin):
         "_requires_attention",
     )
     list_filter = (
-        "submitted_by",
+        SubmittedByFilter,
         "requires_attention",
         "language",
         "content_area",
