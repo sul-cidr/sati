@@ -78,6 +78,11 @@ class ItemAdmin(admin.ModelAdmin):
     _requires_attention.admin_order_field = "requires_attention"
     _requires_attention.short_description = "Requires Attention?"
 
+    def codings(self, obj):
+        return obj.itemcoding_set.count()
+
+    codings.short_description = "# Codings"
+
     save_on_top = True
 
     formfield_overrides = {
@@ -89,6 +94,7 @@ class ItemAdmin(admin.ModelAdmin):
         "name",
         "content_area",
         "format",
+        "codings",
         "_requires_attention",
     )
     list_filter = (
