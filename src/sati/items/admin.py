@@ -93,7 +93,6 @@ class ItemAdmin(admin.ModelAdmin):
         "item_id",
         "name",
         "content_area",
-        "format",
         "codings",
         "_requires_attention",
     )
