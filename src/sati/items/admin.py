@@ -71,6 +71,11 @@ class SubmittedByFilter(admin.SimpleListFilter):
 class ItemAdmin(admin.ModelAdmin):
     alert_icon = mark_safe("<img src='/static/admin/img/icon-alert.svg' alt='Alert'>")
 
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        qs = qs.annotate(codings_ct=models.Count("itemcoding"))
+        return qs
+
     def _requires_attention(self, obj):
         if obj.requires_attention:
             return self.alert_icon
@@ -80,8 +85,9 @@ class ItemAdmin(admin.ModelAdmin):
     _requires_attention.short_description = alert_icon
 
     def codings(self, obj):
-        return obj.itemcoding_set.count()
+        return obj.codings_ct
 
+    codings.admin_order_field = "codings_ct"
     codings.short_description = "# Codings"
 
     save_on_top = True
