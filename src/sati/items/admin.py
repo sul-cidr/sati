@@ -69,14 +69,15 @@ class SubmittedByFilter(admin.SimpleListFilter):
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
+    alert_icon = mark_safe("<img src='/static/admin/img/icon-alert.svg' alt='Alert'>")
+
     def _requires_attention(self, obj):
-        alert = "<img src='/static/admin/img/icon-alert.svg' alt='Alert'>"
         if obj.requires_attention:
-            return mark_safe(alert)
+            return self.alert_icon
         return ""
 
     _requires_attention.admin_order_field = "requires_attention"
-    _requires_attention.short_description = "Requires Attention?"
+    _requires_attention.short_description = alert_icon
 
     def codings(self, obj):
         return obj.itemcoding_set.count()
