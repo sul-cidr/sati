@@ -77,11 +77,13 @@ label[for="id_main_image"] {
 }
 
 /* Requires attention field in list view */
-.column-_requires_attention {
-  max-width: 35px;
+.column-_requires_attention,
+.column-codings {
+  max-width: 60px;
 }
 
-.field-_requires_attention {
+.field-_requires_attention,
+.field-codings {
   text-align: center;
 }
 
