@@ -88,7 +88,7 @@ class Submission(models.Model):
 
 
 class Test(models.Model):
-    name = models.CharField(max_length=30, unique=True)
+    name = models.CharField(max_length=30)
     year = models.PositiveSmallIntegerField()
     source_url = models.URLField(
         blank=True, null=False, default="", verbose_name="Source URL"
