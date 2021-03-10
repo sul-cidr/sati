@@ -88,7 +88,7 @@ class Submission(models.Model):
 
 
 class Test(models.Model):
-    name = models.CharField(max_length=30, unique=True)
+    name = models.CharField(max_length=50)
     year = models.PositiveSmallIntegerField()
     source_url = models.URLField(
         blank=True, null=False, default="", verbose_name="Source URL"
@@ -99,7 +99,7 @@ class Test(models.Model):
     notes = models.TextField(blank=True, null=False, default="")
 
     def __str__(self):
-        return f"{self.name} ({self.year})"
+        return f"{self.name}, {self.year} ({self.get_grade_level_display()})"
 
 
 class Item(Submission):
