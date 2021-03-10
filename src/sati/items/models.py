@@ -99,7 +99,7 @@ class Test(models.Model):
     notes = models.TextField(blank=True, null=False, default="")
 
     def __str__(self):
-        return f"{self.name}, {self.year} ({self.grade_level}))"
+        return f"{self.name}, {self.year} ({self.get_grade_level_display()})"
 
 
 class Item(Submission):
