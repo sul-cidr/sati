@@ -101,6 +101,9 @@ class Test(models.Model):
     def __str__(self):
         return f"{self.name}, {self.year} ({self.get_grade_level_display()})"
 
+    class Meta:
+        ordering = ["name", "year", "grade_level"]
+
 
 class Item(Submission):
     item_id = models.CharField(max_length=30, unique=True, verbose_name="Item ID")
