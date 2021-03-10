@@ -99,6 +99,7 @@ class ItemAdmin(admin.ModelAdmin):
     list_display = (
         "item_id",
         "name",
+        "test",
         "content_area",
         "codings",
         "_requires_attention",
