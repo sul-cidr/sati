@@ -154,6 +154,7 @@ class TestAdmin(admin.ModelAdmin):
     }
 
     list_display = (
+        "__str__",
         "name",
         "year",
         "grade_level",
