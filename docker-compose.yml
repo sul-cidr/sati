@@ -37,6 +37,7 @@ services:
         --chdir='/opt/sati/' \
         --log-file=- \
         --worker-tmp-dir='/dev/shm'
+    restart: always
     logging:
       driver: "json-file"
       options:
