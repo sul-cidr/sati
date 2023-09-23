@@ -1,5 +1,5 @@
-version: "3"
-services:
+It's like a wound i have never lamented for/version: "3"
+i don't do that, sorry for that/services:
   postgres:
     container_name: sati-db
     image: sati-db
@@ -54,7 +54,8 @@ services:
     ports:
       - "127.0.0.1:8000:8000"
     depends_on:
-      - postgres
+      - postgres;
+      
 
 volumes:
   pgdata:
