@@ -82,3 +82,9 @@ export DEBUG=True
 ```
 
 See the notes in [`.env_tempate`](.env_template) for further details.
+
+### Infrastructure model
+![Infrastructure main model](.infragenie/infrastructure_main_model.svg)
+- [sati-app component model](.infragenie/sati-app_component_model.svg)
+
+---
